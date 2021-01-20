@@ -1,6 +1,8 @@
 <?php
-include 'include/startSession.inc.php';
-include 'classes/accountview.class.php';
+include_once 'include/startSession.inc.php';
+include_once 'classes/accountview.class.php';
+include_once 'classes/accountsController.class.php';
+include_once 'classes/email.class.php';
     if(isset($_POST['email'])) {
         $account = new AccountView();
         if ($account->getAccountFromEmailAssoc($_POST['email'])) {
