@@ -1,5 +1,6 @@
 <?php 
-    include 'include/autoloader.inc.php'
+    include 'include/autoloader.inc.php';
+    include 'include/startSession.php';
 ?>
 <!doctype html>
 <html class="no-js" lang="en">

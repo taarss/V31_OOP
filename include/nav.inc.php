@@ -32,7 +32,7 @@
                     <li><a href='#' class='registerBtn'>Opret bruger</a></li>
                 <?php }
                 else {?>
-                     <li><a href='logout.php'>Log ud</a></li>
+                     <li><a href='include/logout.inc.php'>Log ud</a></li>
                <?php }?>
             </ul>
         </nav>
@@ -46,7 +46,7 @@
         </div>
 </div>
     <div class="login container">
-        <form class="login d-flex flex-wrap" action="authenticate.php" method="post">
+        <form class="login d-flex flex-wrap" action="/opgaver/V31_OOP/include/loginSubmit.inc.php" method="post">
 					<input type="text" name="username" placeholder="Username" id="username" required>
 					<input type="password" name="password" placeholder="Password" id="password" required>
 

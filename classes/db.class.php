@@ -1,4 +1,5 @@
 <?php
+    session_start();
     class Db{
         private $DATABASE_HOST = 'localhost';
         private $DATABASE_USER = 'christianvillads_techv31';
