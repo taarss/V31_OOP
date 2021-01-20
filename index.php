@@ -1,3 +1,6 @@
+<?php 
+    include 'include/autoloader.inc.php'
+?>
 <!doctype html>
 <html class="no-js" lang="en">
 
@@ -26,7 +29,7 @@
 </head>
 
 <body>
-        <?php include 'nav.php' ?>
+    <?php include 'include/nav.inc.php' ?>
     <div class="container">
         <ul class="slider" id="slider">
             <li><img src="img/slide1.jpg" alt=""></li>
@@ -47,7 +50,11 @@
                 </div>
                 <div class="catMain">
                     <ul>
-                        
+                        <?php 
+
+                            $categoriesObj = new CategoriesView();
+                            $categoriesObj->listCategories();
+                        ?>
                     </ul>
                 </div>
             </div>
