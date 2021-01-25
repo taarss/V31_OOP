@@ -1,4 +1,5 @@
 <?php
+    include_once 'db.class.php';
     class Categories extends Db{
         protected function getCategories(){
             $sql = "SELECT * FROM categories";

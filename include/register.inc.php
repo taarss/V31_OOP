@@ -30,6 +30,7 @@
         $accountController = new AccountController();
         $accountController->createAccount($_POST['username'], $password, $_POST['email'], $uniqid);
         $activate_link = 'https://Christianvillads.tech/opgaver/V31_OOP/activate.php?email=' . $_POST['email'] . '&code=' . $uniqid;
-        $email = new Email("Account Activation Required", )
+        $email = new Email("Account Activation Required", $activate_link, 'Please click the following link to activate your account:', $_POST['email']);
+        $email->sendEmail();
         
     }

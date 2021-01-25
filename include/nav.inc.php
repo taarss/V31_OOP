@@ -59,7 +59,7 @@
         <a id="newUser" class="registerBtn" href="#">Ny bruger?</a>
     </div>
     <div class="register container">
-    <form action="register.php" method="post" autocomplete="off">
+    <form action="include/register.inc.php" method="post" autocomplete="off">
           <input
             type="text"
             name="username"
