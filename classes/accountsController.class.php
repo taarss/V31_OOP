@@ -8,4 +8,7 @@
         public function updatePassword($password, $email){
             $this->updateAccountPassword($password, $email);
         }
+        public function createAccount($username, $password, $email, $uniqid){
+            $this->createNewAccount($username, $password, $email, $uniqid);
+        }
     }

@@ -1,21 +1,10 @@
 <?php
-include 'include/startSession.inc.php';
-include 'classes/accountview.class.php';
+include 'classes/resetpassword.class.php';
 if (isset($_GET['email'], $_GET['code']) && !empty($_GET['code'])) {
-    $accountView = new AccountView();
-    if ($accountView->getAccountFromEmailAndResetCode($_GET['email'], $_GET['code'])) {
-        if (isset($_POST['npassword'], $_POST['cpassword'])) {
-            if (strlen($_POST['npassword']) > 20 || strlen($_POST['npassword']) < 5) {
-                $msg = 'Password must be between 5 and 20 characters long!';
-            } else if ($_POST['npassword'] != $_POST['cpassword']) {
-                $msg = 'Passwords must match!';
-            } else {
-                echo'Password has been reset! You can now <a href="index.php">login</a>!';
-            }
-        }
-    }
-    else {
-        exit('Incorrect email and/or code!');
+    if (isset($_POST['npassword'], $_POST['cpassword'])) {
+        $resetPassword = new Resetpassword($_POST['npassword'], $_GET['email'], $_POST['cpassword'], $_GET['code']);
+        $resetPassword->validateReset();
+        echo $resetPassword->errMsg;
     }
 }
 else {
