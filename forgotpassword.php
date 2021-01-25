@@ -7,11 +7,17 @@ include_once 'classes/email.class.php';
         $account = new AccountView();
         if ($account->getAccountFromEmailAssoc($_POST['email'])) {
             $uniqid = uniqid();
-            $updateAccount = new AccountController();
-            $updateAccount->updateResetCode($uniqid, $_POST['email']);
-            $reset_link = 'https://christianvillads.tech/opgaver/V31_Examen/resetpassword.php?email=' . $_POST['email'] . '&code=' . $uniqid;
-            $email = new Email();
-            $email->sendEmail('Password Reset', $reset_link ,'Please click the following link to reset your password', $_POST['email']);
+            try {
+                $updateAccount = new AccountController();
+                $updateAccount->updateResetCode($uniqid, $_POST['email']);
+                $reset_link = 'https://christianvillads.tech/opgaver/V31_OOP/resetpassword.php?email=' . $_POST['email'] . '&code=' . $uniqid;
+                $email = new Email('Password Reset', $reset_link, 'Please click the following link to reset your password', $_POST['email']);
+                $email->sendEmail();
+                echo 'no error';
+            }
+            catch(Exception $e) {
+                echo 'Message: ' . $e->getMessage();
+            }
             echo "An email with a reset link has been sent";
         }
         else {

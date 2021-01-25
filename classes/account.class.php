@@ -24,7 +24,7 @@
             return $results;
         }
         public function getAccountFromUsernameAndEmail($username, $email){
-            $sql = "SELECT * FROM accounts WHERE email = ? AND activation_code = ?";
+            $sql = "SELECT * FROM accounts WHERE email = ? OR email = ?";
             $stmt = $this->connect()->prepare($sql);                                                                                                                                                               
             $stmt->execute([$username, $email]);
             $results = $stmt->fetchAll();
@@ -42,6 +42,11 @@
             $sql = 'UPDATE accounts SET password = ?, reset = "" WHERE email = ?';
             $stmt = $this->connect()->prepare($sql);
             $stmt->execute([$password, $email]);
+            echo "test";
         }
-
+        public function createNewAccount($username, $password, $email, $uniqid){
+            $sql = 'INSERT INTO accounts SET username = ?, password = ?, email = ?, activation_code = ?';
+            $stmt = $this->connect()->prepare($sql);
+            $stmt->execute([$username, $password, $email, $uniqid]);
+        }
     }

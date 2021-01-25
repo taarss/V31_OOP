@@ -9,4 +9,8 @@
             $result = $this->getAccountFromEmailAndResetCode($email, $reset);
             return $result;
         }
+        public function getAccountFromEmailAndUsername($email, $username){
+            $result = $this->getAccountFromUsernameAndEmail($username, $email);
+            return $result;
+        }
     }
