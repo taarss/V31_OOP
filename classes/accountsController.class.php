@@ -11,4 +11,7 @@
         public function createAccount($username, $password, $email, $uniqid){
             $this->createNewAccount($username, $password, $email, $uniqid);
         }
+        public function updateAcivateCode($email, $code){
+            $this->updateAcivationCode($email, $code);
+        }
     }

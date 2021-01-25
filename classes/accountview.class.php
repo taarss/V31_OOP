@@ -13,4 +13,8 @@
             $result = $this->getAccountFromUsernameAndEmail($username, $email);
             return $result;
         }
+        public function getAccountFromActivateCode($email, $code){
+            $result = $this->getAccountActivateCode($email, $code);
+            return $result;
+        }
     }

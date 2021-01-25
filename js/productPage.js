@@ -4,12 +4,13 @@ let selectedId = urlParams.get('category');
 
         
         $.ajax({
-            url: 'getCategories.php',
+            url: 'include/ajaxCall.inc.php',
             type: 'post',
             data: {
-                "callFunc2": 1,
+                "getCategories": 1,
             },
             success: function(data) {
+                console.log(data);
                 JSON.parse(data).forEach(element => {
                     let option = document.createElement("option");
                     option.setAttribute("value", element["id"]);   
@@ -38,14 +39,14 @@ let selectedId = urlParams.get('category');
             const urlParams = new URLSearchParams(queryString);
             const gender = urlParams.get('gender')
             if (gender) {
-                window.location.href = "https://christianvillads.tech/opgaver/V31_Examen/products.php?category="+newCategory+"&gender="+gender;
+                window.location.href = "https://christianvillads.tech/opgaver/V31_OOP/products.php?category="+newCategory+"&gender="+gender;
             }
             else{
-                window.location.href = "https://christianvillads.tech/opgaver/V31_Examen/products.php?category="+newCategory;
+                window.location.href = "https://christianvillads.tech/opgaver/V31_OOP/products.php?category="+newCategory;
             }
         }
         function viewNewGender(newGender) {
-            window.location.href = "https://christianvillads.tech/opgaver/V31_Examen/products.php?category=0&gender="+newGender;
+            window.location.href = "https://christianvillads.tech/opgaver/V31_OOP/products.php?category=0&gender="+newGender;
         }
         
         
