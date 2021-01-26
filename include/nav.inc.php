@@ -34,6 +34,13 @@
                 else {?>
                      <li><a href='include/logout.inc.php'>Log ud</a></li>
                <?php }?>
+               <?php
+               $accountView = new AccountView();
+               $adminLevel = $accountView->getAdminLevel($_SESSION['id']);
+               if (intval($adminLevel) <= 3 && $_SESSION['id'] != null) {?>
+                <li class="<?php if($currentPage =='adminpanel'){echo 'active';}?>"><a href='adminPanel.php'>Admin Panel</a></li>
+              <?php }
+               ?>
             </ul>
         </nav>
         <div class="basket">
