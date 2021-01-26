@@ -30,6 +30,13 @@
             $results = $stmt->fetchAll();
             return $results;
         }
+        protected function getAccountAdminLevel($id){
+            $sql = "SELECT adminLevel FROM accounts WHERE id = ?";
+            $stmt = $this->connect()->prepare($sql);                                                                                                                                                               
+            $stmt->execute([$id]);
+            $results = $stmt->fetchAll();
+            return $results;
+        }
 
         //controller
         protected function updateResetCode($code, $email){
@@ -52,5 +59,14 @@
             $sql = 'INSERT INTO accounts SET username = ?, password = ?, email = ?, activation_code = ?';
             $stmt = $this->connect()->prepare($sql);
             $stmt->execute([$username, $password, $email, $uniqid]);
+        }
+
+
+        //Methods
+        protected function checkIfLoggedIn(){
+            if (!isset($_SESSION['loggedin'])) {
+                header('Location: index.php');
+                exit;
+            }
         }
     }

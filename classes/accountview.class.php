@@ -17,4 +17,11 @@
             $result = $this->getAccountActivateCode($email, $code);
             return $result;
         }
+        public function getAdminLevel($id){
+            $result = $this->getAccountAdminLevel($id);
+            return $result;
+        }
+        public function checkLoggedIn(){
+            $this->checkIfLoggedIn();
+        }
     }
