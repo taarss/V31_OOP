@@ -22,7 +22,8 @@
             echo $file_path;
             $sql = "INSERT INTO products (name, price, description, manufactur, type, img, sex, createdBy) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
             $stmt = $this->connect()->prepare($sql);                                                                                                                                                               
-            $stmt->execute([$name, $price, $description, $manufactur, $type, $file_path, $gender, $_SESSION['id']]);
+            $stmt->execute([$name, $price, $description, $manufactur, $type, $file_path, $gender, $_SESSION['id']['id']]);
+            echo var_dump($stmt->errorInfo());
             echo 'done';
         }
 
