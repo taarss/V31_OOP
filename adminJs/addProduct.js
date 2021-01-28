@@ -9,7 +9,7 @@ document.querySelector(".addProductBtn").onclick = e => {
     adp.innerHTML = `
     <button class="adpBtn w-25 button bg-danger text-light border-0">X</button>
     <h3>Create product</h3>
-    <form enctype="multipart/form-data" class="postForm d-flex flex-column"  action="createProduct.php" method="post" id="createProduct">
+    <form enctype="multipart/form-data" class="postForm d-flex flex-column"  action="include/ajaxCall.inc.php" method="post" id="createProduct">
         <input id="createProductImg" type="file" name="post_img" required><br>
         <input id="createProductName" type="text" name="post_name" placeholder="name" required>
         <input id="createProductPrice" type="text" name="post_price" placeholder="price" required>
@@ -26,13 +26,13 @@ document.querySelector(".addProductBtn").onclick = e => {
     </form>
     `;
     $.ajax({
-        url: 'getCategories.php',
+        url: 'include/ajaxCall.inc.php',
         type: 'post',
         data: {
-            "callFunc2": 1,
+            "getCategories": 1,
         },
         success: function(data) {
-            
+            console.log(data);
             JSON.parse(data).forEach(element => {
                 let option = document.createElement("option");
                 option.setAttribute("value", element["id"]);
@@ -48,11 +48,7 @@ document.querySelector(".addProductBtn").onclick = e => {
         e.preventDefault();
         document.body.removeChild(adp_underlay);
         document.body.removeChild(adp);
-    }
-
-}
-
-$("#createProduct").submit(function(event) {
+        $("#createProduct").submit(function(event) {
             event.preventDefault();
             var form = $(this);
             var url = form.attr('action');
@@ -61,7 +57,13 @@ $("#createProduct").submit(function(event) {
                 url: url,
                 data: form.serialize(),
                 success: function(data) {
-                    
+                    console.log(data);
                 }
             });
         });
+    }
+    
+
+
+}
+
