@@ -32,13 +32,15 @@ document.querySelector(".manageProductsBtn").onclick = e => {
 
 		function load_data(query, category) {
 			$.ajax({
-				url: "fetch.php",
+				url: "include/ajaxCall.inc.php",
 				method: "post",
 				data: {
+                    livesearch: 1,
                     query: query,
                     category: category
 				},
-				success: function(data) {    
+				success: function(data) {  
+                    console.log(data);
                     test = JSON.parse(data);
                     createRow(test);
 				}
@@ -48,12 +50,12 @@ document.querySelector(".manageProductsBtn").onclick = e => {
 		$('#search_text').keyup(function() {
             var search = $(this).val();
             document.querySelectorAll('.updateProductForm').forEach(e => e.remove());
+            let yourSelect = document.getElementById("searchCategoryCombobox" );
+            let selectedCat = yourSelect.options[ yourSelect.selectedIndex ].value;
 			if (search != '') {
-                let yourSelect = document.getElementById("searchCategoryCombobox" );
-                let selectedCat = yourSelect.options[ yourSelect.selectedIndex ].value;
 				load_data(search, selectedCat);
 			} else {
-				load_data();
+				load_data("", selectedCat);
 			}
         });
         document.getElementById("searchCategoryCombobox").addEventListener("change", function(){
@@ -109,13 +111,13 @@ document.querySelector(".manageProductsBtn").onclick = e => {
     let addCategoriesOnce = true;
     function getCategories(comboBox, selectedId) {
         $.ajax({
-            url: 'getCategories.php',
+            url: 'include/ajaxCall.inc.php',
             type: 'post',
             data: {
-                "callFunc2": 1,
+                "getCategories": 1,
             },
             success: function(data) {
-                
+                console.log(data);
                 JSON.parse(data).forEach(element => {
                     let option2 = document.createElement("option");
                     let option = document.createElement("option");
