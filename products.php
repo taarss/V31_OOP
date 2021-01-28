@@ -2,6 +2,7 @@
     include_once 'include/startSession.php';
     include_once 'classes/productview.php';
     include_once 'classes/categoriesview.class.php';
+    include_once 'classes/accountview.class.php';
     $currentPage = 'products';
     if(!isset($_GET['category']))
     {
@@ -85,7 +86,7 @@
                         <div class="col-12 col-sm-6 col-md-4 col-lg-3 d-block ">
                             <div class="card mb-2 productPageContainer">
                                     <a href="product.php?id=<?=$key['id']?>">
-                                        <img class="card-img-top productImg" src="<?=$key['img']?>" alt="Card image cap">
+                                        <img class="card-img-top productImg" src="<?php echo str_replace("/customers/5/f/4/christianvillads.tech/httpd.www/opgaver/V31_OOP/", "", $key['img']);  ?>" alt="Card image cap">
                                     </a>
                                     <div class="card-body">
                                         <h5><?=$key['name']?></h5>
