@@ -4,6 +4,7 @@
     include_once '../classes/livesearch.class.php';
     $categoryView = new CategoriesView();
     $productController = new ProductController();
+
     //Get All Categories
     if (isset($_POST['getCategories'])) {
         $result = $categoryView->getAllCategories();
@@ -15,7 +16,10 @@
     }
     //Delete a product
     if (isset($_POST['deleteProduct'])) {
-        
+        $productController->deleteNewProduct($_POST['id']);
+    }
+    if (isset($_POST['updateProduct'])) {
+        $productController->updateNewProduct($_POST['name'], $_POST['price'], $_POST['description'], $_POST['manufactur'], $_POST['category'], $_POST['clothingsex'], $_FILES, $_POST['id']);
     }
     if (isset($_POST['livesearch'])) {
         $search = new LiveSearch($_POST['query'], $_POST['category']);

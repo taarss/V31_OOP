@@ -40,7 +40,6 @@ document.querySelector(".manageProductsBtn").onclick = e => {
                     category: category
 				},
 				success: function(data) {  
-                    console.log(data);
                     test = JSON.parse(data);
                     createRow(test);
 				}
@@ -84,13 +83,14 @@ document.querySelector(".manageProductsBtn").onclick = e => {
             url: url,
             data: form.serialize(),
             success: function(data) {
+                console.log(data);
             }
         });
     });
 
     function deleteProduct(id) {
         $.ajax({
-            url: 'deleteProduct.php',
+            url: 'include/ajaxCall.inc.php',
             type: 'post',
             data: {
                 "deleteProduct": 1,
@@ -117,7 +117,7 @@ document.querySelector(".manageProductsBtn").onclick = e => {
                 "getCategories": 1,
             },
             success: function(data) {
-                console.log(data);
+                console.log(data)
                 JSON.parse(data).forEach(element => {
                     let option2 = document.createElement("option");
                     let option = document.createElement("option");
@@ -153,6 +153,12 @@ document.querySelector(".manageProductsBtn").onclick = e => {
     }
         function createRow(data, type) {
             data.forEach(element => {
+                let dataTypeInput = document.createElement('input');
+                dataTypeInput.setAttribute("type", "text");
+                dataTypeInput.value = "1";
+                dataTypeInput.setAttribute("class", "productDataType");
+                dataTypeInput.setAttribute("name", "updateProduct");
+                dataTypeInput.style.display = 'none';
                 let rowForm = document.createElement("form");
                 rowForm.setAttribute("enctype", "multipart/form-data");
                 let nameInput = document.createElement("input");
@@ -161,6 +167,7 @@ document.querySelector(".manageProductsBtn").onclick = e => {
                 nameInput.setAttribute("name", "name");
                 nameInput.setAttribute("class", "col-2");
                 rowForm.appendChild(nameInput);
+                rowForm.appendChild(dataTypeInput);
                 let priceInput = document.createElement("input");
                 priceInput.setAttribute("type", "text");
                 priceInput.setAttribute("value", element["price"]);
@@ -226,7 +233,7 @@ document.querySelector(".manageProductsBtn").onclick = e => {
                 sexInput.setAttribute("class", "col-1 mx-2 manageClothingsexInput");
                 sexInput.setAttribute("name", "clothingsex");
                 rowForm.appendChild(sexInput);
-                rowForm.setAttribute("action", "updateProducts.php")
+                rowForm.setAttribute("action", "include/ajaxCall.inc.php")
                 rowForm.setAttribute("method", "post")
                 let saveChangesInput = document.createElement("input");
                 saveChangesInput.setAttribute("type", "submit");
@@ -240,7 +247,6 @@ document.querySelector(".manageProductsBtn").onclick = e => {
                 deleteData.setAttribute("class", " border border-dark bg-danger text-white");
                 deleteData.addEventListener('click', function(){
                     deleteProduct(this.parentElement.querySelector(".categoryId").value);
-                    
                 });
                 rowForm.appendChild(deleteData);
                 let categoryId = document.createElement("input");

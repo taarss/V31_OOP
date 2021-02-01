@@ -22,7 +22,6 @@
             }
             if (in_array($file_extn, $allowed) === true && $uploadOk == 1) {
                 $file_path = "../uploads/" . substr(md5(time()), 0, 10) . '.' . $file_extn;
-                echo $file_path;
                 move_uploaded_file($file_temp, $file_path);
                 return $file_path;
             }
@@ -38,6 +37,6 @@
                 echo 'Incorrect file type ';
                 echo implode(',', $allowed);
                 return false;
-            } 
+            }
         }
     }
