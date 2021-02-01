@@ -19,5 +19,6 @@
         }
         public function deleteNewProduct($id){
             $this->deleteProduct($id);
+            header('Location: ../adminPanel.php');
         }
     }
