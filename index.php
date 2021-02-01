@@ -1,6 +1,10 @@
 <?php 
     include 'include/autoloader.inc.php';
     include 'include/startSession.php';
+    include_once 'classes/productview.php';
+    $productView = new ProductView();
+    $productIds = $productView->getAllShowcaseProducts();
+    $frontPageProducts = $productView->getAllProductsOfId($productIds);
 ?>
 <!doctype html>
 <html class="no-js" lang="en">
@@ -52,7 +56,6 @@
                 <div class="catMain">
                     <ul>
                         <?php 
-
                             $categoriesObj = new CategoriesView();
                             $categoriesObj->listCategories();
                         ?>
@@ -97,7 +100,20 @@
                 <!--First slide-->
                 <div class="carousel-item active">
                     <div class="row">
-                       
+                    <?php for ($i=0; $i < 3; $i++) { ?>
+                        <div class="col-md-4">
+                            <div class="card mb-2">
+                                <a href="product.php?id=<?= $frontPageProducts[$i]['id'] ?>">
+                                <img id="frontPageProductImg" src="<?= str_replace("/customers/5/f/4/christianvillads.tech/httpd.www/opgaver/V31_OOP/", "", $frontPageProducts[$i]['img']) ?>" alt="Card image cap">
+                                </a>
+                                <div class="card-body">
+                                    <h5><?= $frontPageProducts[$i]['name'] ?></h5>
+                                    <p class="card-text"><?= $frontPageProducts[$i]['price']?>.99 DKK</p>
+                                    <a class="btn" id="addToCart" href="#">Add to cart</a>
+                                </div>
+                            </div>
+                        </div>
+                        <?php  }?>
                     </div>
                 </div>
                 <!--/.First slide-->
@@ -105,7 +121,20 @@
                 <!--Second slide-->
                 <div class="carousel-item">
                     <div class="row">
-                    
+                    <?php for ($i=3; $i < 6; $i++) { ?>
+                        <div class="col-md-4">
+                            <div class="card mb-2">
+                                <a href="product.php?id=<?= str_replace("/customers/5/f/4/christianvillads.tech/httpd.www/opgaver/V31_OOP/", "", $frontPageProducts[$i]['img']) ?>">
+                                <img  id="frontPageProductImg" src="<?= $frontPageProducts[$i]['img'] ?>" alt="Card image cap">
+                                </a>
+                                <div class="card-body">
+                                    <h5><?= $frontPageProducts[$i]['name'] ?></h5>
+                                    <p class="card-text"><?= $frontPageProducts[$i]['price'] ?>.99 DKK</p>
+                                    <a class="btn" id="addToCart" href="#">Add to cart</a>
+                                </div>
+                            </div>
+                        </div>
+                        <?php  }?>
                     </div>
 
                 </div>
@@ -126,7 +155,20 @@
                 <!--First slide-->
                 <div class="carousel-item active">
                     <div class="row">
-                       
+                    <?php for ($i=6; $i < 9; $i++) { ?>
+                        <div class="col-md-4">
+                            <div class="card mb-2">
+                                <a href="product.php?id=<?= $frontPageProducts[$i]['id'] ?>">
+                                <img id="frontPageProductImg" src="<?= str_replace("/customers/5/f/4/christianvillads.tech/httpd.www/opgaver/V31_OOP/", "", $frontPageProducts[$i]['img']) ?>" alt="Card image cap">
+                                </a>
+                                <div class="card-body">
+                                    <h5><?= $frontPageProducts[$i]['name'] ?></h5>
+                                    <p class="card-text"><?= $frontPageProducts[$i]['price']?>.99 DKK</p>
+                                    <a class="btn" id="addToCart" href="#">Add to cart</a>
+                                </div>
+                            </div>
+                        </div>
+                        <?php  }?>
                     </div>
                 </div>
                 <!--/.First slide-->
@@ -134,7 +176,20 @@
                 <!--Second slide-->
                 <div class="carousel-item">
                     <div class="row">
-                    
+                    <?php for ($i=9; $i < 12; $i++) { ?>
+                        <div class="col-md-4">
+                            <div class="card mb-2">
+                                <a href="product.php?id=<?= $frontPageProducts[$i]['id'] ?>">
+                                <img  id="frontPageProductImg" src="<?= str_replace("/customers/5/f/4/christianvillads.tech/httpd.www/opgaver/V31_OOP/", "", $frontPageProducts[$i]['img']) ?>" alt="Card image cap">
+                                </a>
+                                <div class="card-body">
+                                    <h5><?= $frontPageProducts[$i]['name'] ?></h5>
+                                    <p class="card-text"><?= $frontPageProducts[$i]['price'] ?>.99 DKK</p>
+                                    <a class="btn" id="addToCart" href="#">Add to cart</a>
+                                </div>
+                            </div>
+                        </div>
+                        <?php  }?>
                     </div>
 
                 </div>

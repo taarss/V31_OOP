@@ -9,4 +9,12 @@
             $result = $this->getEveryProduct();
             return $result;
         }
+        public function getAllShowcaseProducts(){
+            $result = $this->getShowcaseProducts();
+            return $result;
+        }
+        public function getAllProductsOfId($id){
+            $result = $this->getProductsOfId($id);
+            return $result;
+        }
     }
