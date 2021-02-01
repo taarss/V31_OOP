@@ -10,6 +10,8 @@
             $dsn = 'mysql:host=' . $this->DATABASE_HOST . ';dbname='. $this->DATABASE_NAME;
             $pdo = new PDO($dsn, $this->DATABASE_USER, $this->DATABASE_PASS);
             $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
             return $pdo;
         }
     }
