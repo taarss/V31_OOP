@@ -63,5 +63,14 @@
             $stmt = $this->connect()->prepare($sql);                                                                                                                                                               
             $stmt->execute([$id]);
         }
+        protected function updateShowcase($productIdArray){
+            $index = 1;
+            foreach ($productIdArray as $key) {
+                $sql = "UPDATE product_showcase SET productId = ? WHERE id = ?";
+                $stmt = $this->connect()->prepare($sql);                                                                                                                                                               
+                $stmt->execute([$key, $index]);
+                $index++;
+            }
+        }
 
     }
