@@ -21,4 +21,8 @@
             $this->deleteProduct($id);
             header('Location: ../adminPanel.php');
         }
+        public function updateProductShowcase($productIdArray){
+            $this->updateShowcase($productIdArray);
+            header('Location: ../adminPanel.php');
+        }
     }

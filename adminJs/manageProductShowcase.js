@@ -1,15 +1,14 @@
 document.querySelector(".manageProductsShowcaseBtn").onclick = e => {
-    console.log("fdfdf");
     let showcasedProducts;
     $.ajax({
-        url: "getProductShowcase.php",
+        url: "include/ajaxCall.inc.php",
         method: "post",
         data: {
-            callFunc2: 1,
+            productShowcase: 1,
         },
-        success: function(data) {    
+        success: function(data) {   
+            console.log(data);
             showcasedProducts = JSON.parse(data); 
-            console.log(showcasedProducts);
         }
     });
     let adp_underlay = document.createElement('div');
@@ -40,13 +39,14 @@ document.querySelector(".manageProductsShowcaseBtn").onclick = e => {
 
 		function load_data(query, category) {
 			$.ajax({
-				url: "fetch.php",
+				url: "include/ajaxCall.inc.php",
 				method: "post",
 				data: {
+                    livesearch: 1,
                     query: query,
                     category: category
 				},
-				success: function(data) {    
+				success: function(data) {  
                     test = JSON.parse(data);
                     createRow(test);
 				}
@@ -88,6 +88,7 @@ document.querySelector(".manageProductsShowcaseBtn").onclick = e => {
             url: url,
             data: form.serialize(),
             success: function(data) {
+
             }
         });
     });
@@ -123,7 +124,7 @@ document.querySelector(".manageProductsShowcaseBtn").onclick = e => {
                 addToShowcaseBtn.setAttribute("type", "checkbox");
                 addToShowcaseBtn.setAttribute("class", "col-4");
                 showcasedProducts.forEach(product => {
-                    if (product['productId'] == element['id']) {
+                    if (product['id'] == element['id']) {
                         updateShowcasedProducts.push(element['id']);
                         addToShowcaseBtn.setAttribute('checked', 'checked');
                     }
@@ -133,7 +134,6 @@ document.querySelector(".manageProductsShowcaseBtn").onclick = e => {
                         updateShowcasedProducts.push(element['id']);
                         document.querySelector("#remainingSlots").innerHTML =  (12 - updateShowcasedProducts.length);
                         if (updateShowcasedProducts.length == 12) {
-                            console.log("pls work");
                             document.querySelectorAll('input[type="checkbox"]:not(:checked)').forEach((element) => {
                                 element.disabled = true;
                              });
@@ -171,12 +171,17 @@ document.querySelector(".manageProductsShowcaseBtn").onclick = e => {
             document.querySelector(".updateSlideshowBtn").addEventListener("click", function() {
                 if (updateShowcasedProducts.length == 12) {
                     $.ajax({
-                        url: 'updateShowcase.php',
+                        url: 'include/ajaxCall.inc.php',
                         type: 'post',
                         data: {
-                            "callFunc2": updateShowcasedProducts,
+                            "updateShowcase": 1,
+                            "productIdArray": updateShowcasedProducts,
+                        },
+                        success: function() {
+                            e.preventDefault();
+                            document.body.removeChild(adp_underlay);
+                            document.body.removeChild(adp);
                         }
-                        
                     });
                 }
             });
@@ -186,10 +191,10 @@ document.querySelector(".manageProductsShowcaseBtn").onclick = e => {
         let addCategoriesOnce = true;
         function getCategories() {
             $.ajax({
-                url: 'getCategories.php',
+                url: 'include/ajaxCall.inc.php',
                 type: 'post',
                 data: {
-                    "callFunc2": 1,
+                    "getCategories": 1,
                 },
                 success: function(data) {
                     if (addCategoriesOnce == true) {

@@ -17,15 +17,20 @@ document.querySelector(".manageCategoriesBtn").onclick = e => {
     </div>
     `;
     $.ajax({
-        url: 'getCategories.php',
+        url: 'include/ajaxCall.inc.php',
         type: 'post',
         data: {
-            "callFunc2": 1,
-        },
+                "getCategories": 1,
+            },
         success: function(data) {
             JSON.parse(data).forEach(element => {
                 let rowForm = document.createElement("form");
                 rowForm.setAttribute("enctype", "multipart/form-data");
+                let dataTypeInput = document.createElement("input");
+                dataTypeInput.setAttribute("name", "updateCategory");
+                dataTypeInput.value = 1;
+                dataTypeInput.style.display = "none";
+                rowForm.appendChild(dataTypeInput);
                 let nameInput = document.createElement("input");
                 nameInput.setAttribute("type", "text");
                 nameInput.setAttribute("value", element["name"]);
@@ -56,7 +61,7 @@ document.querySelector(".manageCategoriesBtn").onclick = e => {
                 rowForm.appendChild(label1);
                 rowForm.appendChild(radio2);
                 rowForm.appendChild(label2);
-                rowForm.setAttribute("action", "updateCategory.php")
+                rowForm.setAttribute("action", "include/ajaxCall.inc.php")
                 rowForm.setAttribute("method", "post")
                 let saveChangesInput = document.createElement("input");
                 saveChangesInput.setAttribute("type", "submit");
@@ -95,7 +100,7 @@ document.querySelector(".manageCategoriesBtn").onclick = e => {
             url: url,
             data: form.serialize(),
             success: function(data) {
-                
+                console.log(data);
             }
         });
     });
