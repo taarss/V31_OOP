@@ -24,4 +24,8 @@
         public function checkLoggedIn(){
             $this->checkIfLoggedIn();
         }
+        public function getAllNoneAdminAccount(){
+            $result = $this->getNoneAdminAccounts();
+            return $result;
+        }
     }

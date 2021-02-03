@@ -1,13 +1,21 @@
 <?php
+    //Categories
     include_once '../classes/categoriesController.php';
     include_once '../classes/categoriesview.class.php';
+    //Products
     include_once '../classes/productController.php';
     include_once '../classes/productview.php';
+    //Search
     include_once '../classes/livesearch.class.php';
+    //Accounts
+    include_once '../classes/accountview.class.php';
+    include_once '../classes/accountsController.class.php';
     $categoryView = new CategoriesView();
     $categoryController = new CategoriesController();
     $productController = new ProductController();
     $productView = new ProductView();
+    $accountView = new AccountView();
+    $accountController = new AccountController();
     //Get All Categories
     if (isset($_POST['getCategories'])) {
         $result = $categoryView->getAllCategories();
@@ -51,5 +59,18 @@
     //Delete category
     if (isset($_POST['deleteCategory'])) {
         $categoryController->deleteCategories($_POST['id'], $_POST['productRealation']);
+    }
+    //Get none administrator accounts
+    if (isset($_POST['getNoneAdminAccounts'])) {
+        $result = $accountView->getAllNoneAdminAccount();
+        echo json_encode($result);
+    }
+    //Update admin status
+    if (isset($_POST['updateAdminStatus'])) {
+        $accountController->updateAccountAdminStatus($_POST['user'], $_POST['status']);
+    }
+    //Ban/unban user
+    if (isset($_POST['updateBan'])) {
+        $accountController->updateUserBan($_POST['banUpdate'], $_POST['user']);
     }
     

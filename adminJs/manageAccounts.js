@@ -17,10 +17,10 @@ document.querySelector(".manageAccountsBtn").onclick = e => {
     </div>
     `;
     $.ajax({
-        url: 'getAccounts.php',
+        url: 'include/ajaxCall.inc.php',
         type: 'post',
         data: {
-            "callFunc2": 1,
+            "getNoneAdminAccounts": 1,
         },
         success: function(data) {
             JSON.parse(data).forEach(element => {
@@ -47,7 +47,6 @@ document.querySelector(".manageAccountsBtn").onclick = e => {
                
                 rowForm.setAttribute("class", "col-12 updateAccountForm");
                 let deleteData = document.createElement("button");
-                console.log(element['isBanned']);
                 if (element['isBanned'] == "0") {
                     deleteData.innerHTML = "ban";
                     deleteData.setAttribute("class", "ml-5 col-1 border border-dark bg-danger text-white");
@@ -110,15 +109,14 @@ document.querySelector(".manageAccountsBtn").onclick = e => {
 
     function updateAdminStatus(user, status) {
         $.ajax({
-            url: "updateAdminStatus.php",
+            url: "include/ajaxCall.inc.php",
             method: "post",
             data: {
-                callFunc2: 1,
+                updateAdminStatus: 1,
                 status: status,
                 user: user
             },
             success: function(data) {    
-                console.log(data);
             }
         });
     }
@@ -127,10 +125,10 @@ document.querySelector(".manageAccountsBtn").onclick = e => {
 
     function updateBan(user, ban) {
         $.ajax({
-            url: "updateBan.php",
+            url: "include/ajaxCall.inc.php",
             method: "post",
             data: {
-                callFunc2: 1,
+                updateBan: 1,
                 banUpdate: ban,
                 user: user
             },
