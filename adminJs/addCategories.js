@@ -8,9 +8,10 @@ document.querySelector(".addCategoriesBtn").onclick = e => {
     adp.innerHTML = `
     <button class="adpBtn w-25 button bg-danger text-light border-0">X</button>
     <h3>Create category</h3>
-    <form enctype="multipart/form-data" class="postForm d-flex flex-column"  action="createCategory.php" method="post" id="createCategory">
+    <form enctype="multipart/form-data" class="postForm d-flex flex-column"  action="include/ajaxCall.inc.php" method="post" id="createCategory">
         <input id="createCategoryImg" type="file" name="post_img" required><br>
         <input id="createCategoryName" type="text" name="post_name" placeholder="Category name" required>
+        <input type="text" name="createCategory" style="display: none">
         <input type="submit">
     </form>
     `;
@@ -31,7 +32,7 @@ $("#createCategory").submit(function(event) {
                 url: url,
                 data: form.serialize(),
                 success: function(data) {
-                    
+                    console.log(data);
                 }
             });
         });

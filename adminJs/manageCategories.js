@@ -107,11 +107,11 @@ document.querySelector(".manageCategoriesBtn").onclick = e => {
 
     function deleteCategory(id, productRealtion) {
         $.ajax({
-            url: 'deleteCategory.php',
+            url: 'include/ajaxCall.inc.php',
             type: 'post',
             data: {
                 "deleteCategory": 1,
-                "productRealtion": productRealtion,
+                "productRealation": productRealtion,
                 "id": id,
             },
             success: function(data) { 

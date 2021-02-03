@@ -40,8 +40,16 @@
     if (isset($_POST['updateShowcase'])) {
         $productController->updateProductShowcase($_POST['productIdArray']);
     }
+    //Update a category
     if (isset($_POST['updateCategory'])) {
-        echo var_dump($_POST);
         $categoryController->updateCategories($_POST['name'], $_POST['id'], $_FILES);
+    }
+    //Create new category
+    if (isset($_POST['createCategory'])) {
+        $categoryController->createNewCategory($_POST['post_name'], $_FILES);
+    }
+    //Delete category
+    if (isset($_POST['deleteCategory'])) {
+        $categoryController->deleteCategories($_POST['id'], $_POST['productRealation']);
     }
     
