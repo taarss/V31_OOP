@@ -10,4 +10,14 @@
             $this->updateCategory($name, $id, $image);
             header('Location: ../adminPanel.php');
         }
+        public function createNewCategory($name, $icon){
+            $upload = new Image($icon);
+            $image = realpath($upload->uploadImage());
+            $this->createCategory($name, $image);
+            header('Location: ../adminPanel.php');
+        }
+        public function deleteCategories($id, $productRelation){
+            $this->deleteCategory($id, $productRelation);
+            header('Location: ../adminPanel.php');
+        }
     }
