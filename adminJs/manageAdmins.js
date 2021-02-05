@@ -17,10 +17,10 @@ document.querySelector(".manageAdminsBtn").onclick = e => {
     </div>
     `;
     $.ajax({
-        url: 'getAdmins.php',
+        url: 'include/ajaxCall.inc.php',
         type: 'post',
         data: {
-            "callFunc2": 1,
+            "getAllAdminAccounts": 1,
         },
         success: function(data) {
             JSON.parse(data).forEach(element => {
@@ -47,12 +47,14 @@ document.querySelector(".manageAdminsBtn").onclick = e => {
                 let saveChangesInput = document.createElement("input");
                 saveChangesInput.setAttribute("type", "submit");
                 saveChangesInput.setAttribute("class", "col-1");
+                saveChangesInput.setAttribute("value", "update");
                 saveChangesInput.addEventListener('click', function(){ 
                     event.preventDefault();
                     let yourSelect = this.parentNode.querySelector(".manageAccessLevelInput");
                     let selectedLevel = yourSelect.options[ yourSelect.selectedIndex ].value;
                     let accountId = this.parentNode.querySelector(".categoryId").value;   
                     updateLevel(accountId, selectedLevel);
+                    this.value = "updated";
                 });
                 rowForm.appendChild(saveChangesInput);
                 rowForm.setAttribute("class", "col-12 updateCategoryForm");
@@ -60,8 +62,9 @@ document.querySelector(".manageAdminsBtn").onclick = e => {
                 deleteData.innerHTML = "demote";
                 deleteData.setAttribute("class", "col-1 border border-dark bg-danger text-white");
                 deleteData.addEventListener('click', function(){
+                    event.preventDefault();
                     demoteAdmin(this.parentElement.querySelector(".categoryId").value);
-                    console.log(this.parentElement.querySelector(".categoryId").value);
+                    this.parentElement.remove();
                 });
                 rowForm.appendChild(deleteData);
                 let categoryId = document.createElement("input");
@@ -82,22 +85,26 @@ document.querySelector(".manageAdminsBtn").onclick = e => {
 
   function updateLevel(id, level) {
     $.ajax({
-        url: 'updateAdminLevel.php',
+        url: 'include/ajaxCall.inc.php',
         type: 'post',
         data: {
-            "user": level,
-            "level": id,
+            "updateAdminLevel": 1,
+            "user": id,
+            "level": level,
+        },
+        success: function(data) {
         }
     });
   }
 
     function demoteAdmin(id) {
         $.ajax({
-            url: 'demoteAdmin.php',
+            url: 'include/ajaxCall.inc.php',
             type: 'post',
             data: {
                 "demoteAdmin": 1,
-                "id": id,
+                "user": id,
+                "level": 4
             },
             success: function(data) { 
                 console.log(data);

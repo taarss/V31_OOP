@@ -81,8 +81,8 @@ document.querySelector(".manageAccountsBtn").onclick = e => {
                     else{
                         status = 4;
                     }
-                    this.innerHTML = "updated";
                     event.preventDefault();
+                    this.value = "updated";
                     let accountId = this.parentNode.querySelector(".accountId").value;    
                     updateAdminStatus(accountId, status)
                 });

@@ -50,6 +50,14 @@
             $results = $stmt->fetchAll();
             return $results;
         }
+        //Get all admin accounts
+        protected function getAdminAccounts(){
+            $sql = "SELECT id, username, email, adminLevel, isBanned FROM accounts WHERE adminLevel <= 3";
+            $stmt = $this->connect()->prepare($sql);                                                                                                                                                               
+            $stmt->execute();
+            $results = $stmt->fetchAll();
+            return $results;
+        }
 
         //controller
         //Update reset code
@@ -90,6 +98,12 @@
             $stmt = $this->connect()->prepare($sql);
             $stmt->execute([$banUpdate, $id]); 
             header('Location: ../adminPanel.php');
+        }
+        //Update admin level
+        protected function updateAdminLevel($id, $level){
+            $sql = 'UPDATE accounts SET adminLevel = ? WHERE id = ?';
+            $stmt = $this->connect()->prepare($sql);
+            $stmt->execute([$level, $id]); 
         }
 
 
