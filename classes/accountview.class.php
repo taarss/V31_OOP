@@ -28,4 +28,8 @@
             $result = $this->getNoneAdminAccounts();
             return $result;
         }
+        public function getAllAdminAccounts(){
+            $result = $this->getAdminAccounts();
+            return $result;
+        }
     }

@@ -16,13 +16,16 @@ document.querySelector(".manageAccessLevelBtn").onclick = e => {
         <h4 class="col-2">Manage access level</h4>
     </div>
     `;
+
+
     $.ajax({
-        url: 'getAccessLevel.php',
+        url: 'include/ajaxCall.inc.php',
         type: 'post',
         data: {
-            "callFunc2": 1,
+            "getAccessLevels": 1,
         },
         success: function(data) {
+            console.log(data);
             JSON.parse(data).forEach(element => {
                 let rowForm = document.createElement("form");
                 rowForm.setAttribute("enctype", "multipart/form-data");
@@ -30,6 +33,11 @@ document.querySelector(".manageAccessLevelBtn").onclick = e => {
                 p.setAttribute("class", "col-3")
                 p.innerHTML = "Access Level "+element['id'];
                 rowForm.appendChild(p);
+                let dataTypeInput = document.createElement("input");
+                dataTypeInput.name = "updateAccessLevelPermissions";
+                dataTypeInput.style.display = "none";
+                dataTypeInput.value = 1;
+                rowForm.appendChild(dataTypeInput);
                 let radio1 = document.createElement("input");
                 radio1.setAttribute("type", "checkbox");
                 radio1.setAttribute("name", "manageProductsRadio");
@@ -68,11 +76,12 @@ document.querySelector(".manageAccessLevelBtn").onclick = e => {
                 }
                 rowForm.appendChild(radio3);
                 rowForm.appendChild(radio4);
-                rowForm.setAttribute("action", "updateAccessLevel.php")
                 rowForm.setAttribute("method", "post")
+                //rowForm.setAttribute("action", "include/ajaxCall.inc.php");
                 let saveChangesInput = document.createElement("input");
                 saveChangesInput.setAttribute("type", "submit");
                 saveChangesInput.setAttribute("class", "col-1");
+                saveChangesInput.value = "update";
                 rowForm.appendChild(saveChangesInput);
                 rowForm.setAttribute("class", "col-12 updateAccessLevelForm");
                 let categoryId = document.createElement("input");
@@ -83,26 +92,25 @@ document.querySelector(".manageAccessLevelBtn").onclick = e => {
                 categoryId.style.position = "absolute";
                 categoryId.setAttribute("class", "categoryId");
                 rowForm.appendChild(categoryId);
+                rowForm.addEventListener("submit", function(e){
+                    event.preventDefault();
+                    var form = $(this);
+                    var url = 'include/ajaxCall.inc.php';
+                    $.ajax({
+                        type: "POST",
+                        url: url,
+                        data: form.serialize(),
+                        success: function(data) {
+                            console.log(data);
+                            saveChangesInput.value = "updated";
+                        }
+                    });
+                });
                 document.querySelector(".manageCategoriesTable").appendChild(rowForm);
             });
         }
+        
     });
-    
-
-    $("#updateCategoryForm").submit(function(event) {
-        event.preventDefault();
-        var form = $(this);
-        var url = form.attr('action');
-        $.ajax({
-            type: "POST",
-            url: url,
-            data: form.serialize(),
-            success: function(data) {
-                
-            }
-        });
-    });
-
     document.body.appendChild(adp);
     document.querySelector(".adpBtn").onclick = e => {
         e.preventDefault();

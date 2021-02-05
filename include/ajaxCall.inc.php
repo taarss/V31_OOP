@@ -10,12 +10,15 @@
     //Accounts
     include_once '../classes/accountview.class.php';
     include_once '../classes/accountsController.class.php';
+    //Access Level
+    include_once '../classes/accesslevel.class.php';
     $categoryView = new CategoriesView();
     $categoryController = new CategoriesController();
     $productController = new ProductController();
     $productView = new ProductView();
     $accountView = new AccountView();
     $accountController = new AccountController();
+    $accessLevel = new AccessLevel($_SESSION['id']);
     //Get All Categories
     if (isset($_POST['getCategories'])) {
         $result = $categoryView->getAllCategories();
@@ -65,6 +68,10 @@
         $result = $accountView->getAllNoneAdminAccount();
         echo json_encode($result);
     }
+    if (isset($_POST['getAllAdminAccounts'])) {
+        $result = $accountView->getAllAdminAccounts();
+        echo json_encode($result);
+    }
     //Update admin status
     if (isset($_POST['updateAdminStatus'])) {
         $accountController->updateAccountAdminStatus($_POST['user'], $_POST['status']);
@@ -72,5 +79,19 @@
     //Ban/unban user
     if (isset($_POST['updateBan'])) {
         $accountController->updateUserBan($_POST['banUpdate'], $_POST['user']);
+    }
+    //Update admin level
+    if (isset($_POST['updateAdminLevel']) or isset($_POST['demoteAdmin'])) {
+        $accountController->updateAdministratorLevel($_POST['user'], $_POST['level']);
+    }
+    //Get Access levels
+    if (isset($_POST['getAccessLevels'])) {
+        $result = $accessLevel->getAllAccessLevels();
+        echo json_encode($result);
+    }
+    //Update Access level permissions
+    if (isset($_POST['updateAccessLevelPermissions'])) {
+        echo var_dump($_POST);
+        $result = $accessLevel->updateAccessLevel($_POST['manageProductsRadio'], $_POST['manageCategoriesRadio'], $_POST['manageApiRadio'], $_POST['manageAccessLevelRadio'], $_POST['id']);
     }
     
