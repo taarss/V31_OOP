@@ -12,6 +12,9 @@
     include_once '../classes/accountsController.class.php';
     //Access Level
     include_once '../classes/accesslevel.class.php';
+    //API
+    include_once '../classes/apiController.class.php';
+    include_once '../classes/apiview.class.php';
     $categoryView = new CategoriesView();
     $categoryController = new CategoriesController();
     $productController = new ProductController();
@@ -19,6 +22,8 @@
     $accountView = new AccountView();
     $accountController = new AccountController();
     $accessLevel = new AccessLevel($_SESSION['id']);
+    $apiController = new ApiController();
+    $apiView = new ApiView();
     //Get All Categories
     if (isset($_POST['getCategories'])) {
         $result = $categoryView->getAllCategories();
@@ -91,7 +96,20 @@
     }
     //Update Access level permissions
     if (isset($_POST['updateAccessLevelPermissions'])) {
-        echo var_dump($_POST);
         $result = $accessLevel->updateAccessLevel($_POST['manageProductsRadio'], $_POST['manageCategoriesRadio'], $_POST['manageApiRadio'], $_POST['manageAccessLevelRadio'], $_POST['id']);
     }
+    //Get all api keys
+    if (isset($_POST['getAllApiKeys'])) {
+        $result = $apiView->getAllApiKeys();
+        echo json_encode($result);
+    }
+    //Delete api key
+    if (isset($_POST['deleteApiKey'])) {
+        $apiController->deleteApiKey($_POST['id']);
+    }
+    //Generate new api key
+    if (isset($_POST['generateNewApiKey'])) {
+        $apiController->generateNewKey();
+    }
+
     
