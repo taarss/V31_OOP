@@ -14,10 +14,10 @@ document.querySelector(".manageApiKeyBtn").onclick = e => {
     </div>
     `;
     $.ajax({
-        url: 'getApiKeys.php',
+        url: 'include/ajaxCall.inc.php',
         type: 'post',
         data: {
-            "callFunc2": 1,
+            "getAllApiKeys": 1,
         },
         success: function(data) {
             JSON.parse(data).forEach(element => {
@@ -52,10 +52,10 @@ document.querySelector(".manageApiKeyBtn").onclick = e => {
     
     function deleteapi(id) {
         $.ajax({
-            url: 'deleteApi.php',
+            url: 'include/ajaxCall.inc.php',
             type: 'post',
             data: {
-                "deleteApi": 1,
+                "deleteApiKey": 1,
                 "id": id,
             },
             success: function(data) { 

@@ -8,8 +8,8 @@ document.querySelector(".addApiKeyBtn").onclick = e => {
     adp.innerHTML = `
     <button class="adpBtn w-25 button bg-danger text-light border-0">X</button>
     <h3>Add Api Key</h3>
-    <form class="postForm d-flex flex-column"  action="createApikey.php" method="post" id="addApiKey">
-        <input type="submit" class="col-12" value="     Add New Api Key     ">
+    <form class="postForm d-flex flex-column"  action="include/ajaxCall.inc.php" method="post" id="addApiKey">
+        <input type="submit" class="col-12" name="generateNewApiKey" value="     Add New Api Key     ">
     </form>
     `;
     document.body.appendChild(adp);
