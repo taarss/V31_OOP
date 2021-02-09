@@ -20,7 +20,6 @@
                     $stmt->execute(array("%$this->query%", "%$this->query%"));
                     $results = $stmt->fetchAll();
                     return $results;
-
                 }
                 else {
                     $sql = "SELECT * FROM products

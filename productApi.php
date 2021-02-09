@@ -4,12 +4,13 @@ header("Content-Type:application/json");
     include_once 'classes/apiview.class.php';
     include_once 'classes/productview.php';
     $key= $_GET['key'];
-    if ($key == null) {
+    $apiView = new ApiView();
+    $isLocked = $apiView->checkApiLock();
+    if ($key == null && $isLocked == 1) {
         echo "NO API KEY GIVEN ERR 400";
     }
     else {
-        $apiView = new ApiView();
-        if (!$apiView->validateApiKey($key)) {
+        if (!$apiView->validateApiKey($key) && $isLocked == 1) {
             echo "INCORRECT API KEY ERR 401";
         }
         else {

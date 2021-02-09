@@ -14,4 +14,13 @@
                 return false;
             }
         }
+        public function checkApiLock(){
+            $result = $this->checkLock();
+            if ($result[0]['isLocked'] == 1) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
     }

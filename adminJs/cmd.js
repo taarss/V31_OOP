@@ -20,9 +20,10 @@ $(document).ready(function() {
                 createP.innerHTML.lastIndexOf(")")
             );
             $.ajax({
-                url: 'getLogs.php',
+                url: 'include/ajaxCall.inc.php',
                 type: 'post',
                 data: {
+                    "getLogs": 1,
                     "limit": logSubString,
                 },
                 success: function(data) { 
