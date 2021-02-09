@@ -70,7 +70,12 @@
             </div>
             <div>
                 <p class="m-0 mt-2">Toggle api lock</p>
-                <button class="toggleApiKeyBtn">Toggle</button>
+                <div class="apiCheckBox">
+                <label class="switch">
+                    <input type="checkbox" id="apiLockCheckBox">
+                    <span class="slider round"></span>
+                </label>
+                </div>
             </div>
         </div>
         <div class="border rounded p-5 col-3 m-3 shadow" id="adminAccessLevel">
@@ -98,6 +103,7 @@
                 </div>
             </div>
         </div>
+    <script src="adminJs/toggleApiLock.js"></script>
     <script src="adminJs/manageAccounts.js"></script>
     <script src="adminJs/manageProductShowcase.js"></script>
     <script src="adminJs/manageAdmins.js"></script>

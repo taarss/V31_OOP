@@ -26,4 +26,16 @@
             $results = $stmt->fetchAll();
             return $results;
         }
+        protected function checkLock(){
+            $sql = "SELECT * FROM apiLock";
+            $stmt = $this->connect()->prepare($sql);                                                                                                                                                               
+            $stmt->execute();
+            $results = $stmt->fetchAll();
+            return $results;
+        }
+        protected function updateLock($bool){
+            $sql = "UPDATE apiLock SET isLocked = ? WHERE id = 1";
+            $stmt = $this->connect()->prepare($sql);                                                                                                                                                               
+            $stmt->execute([$bool]);
+        }
     }

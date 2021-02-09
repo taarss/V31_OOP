@@ -19,7 +19,7 @@
                     $sql = "SELECT manage_categories FROM accessLevel WHERE id = ?";
                     break;
                 case 'manage_api':
-                    $sql = "SELECT manage_api FROM accesLevel WHERE id = ?";
+                    $sql = "SELECT manage_api FROM accessLevel WHERE id = ?";
                     break;
                 case 'manage_accessLevel':
                     $sql = "SELECT manage_accessLevel FROM accessLevel WHERE id = ?";

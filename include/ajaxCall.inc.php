@@ -15,6 +15,8 @@
     //API
     include_once '../classes/apiController.class.php';
     include_once '../classes/apiview.class.php';
+    //Logs
+    include_once '../classes/logView.class.php';
     $categoryView = new CategoriesView();
     $categoryController = new CategoriesController();
     $productController = new ProductController();
@@ -24,6 +26,7 @@
     $accessLevel = new AccessLevel($_SESSION['id']);
     $apiController = new ApiController();
     $apiView = new ApiView();
+    $logsView = new LogView();
     //Get All Categories
     if (isset($_POST['getCategories'])) {
         $result = $categoryView->getAllCategories();
@@ -110,6 +113,22 @@
     //Generate new api key
     if (isset($_POST['generateNewApiKey'])) {
         $apiController->generateNewKey();
+    }
+    //Check if api is locked
+    if (isset($_POST['getApiLock'])) {
+        $result = $apiView->checkApiLock();
+        echo $result;
+    }
+    //Update Api lock
+    if (isset($_POST['updateApiLock'])) {
+        $apiController->updateApiLock($_POST['bool']);
+    }
+    //Get logs
+    if (isset($_POST['getLogs'])) {
+        if ($_POST['limit'] == "") {
+            $result = $logsView->viewAllLogs();
+            echo json_encode($result);
+        }
     }
 
     
