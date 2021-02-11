@@ -46,7 +46,9 @@ document.querySelector(".manageProductsShowcaseBtn").onclick = e => {
                     query: query,
                     category: category
 				},
-				success: function(data) {  
+				success: function(data) 
+                {  
+                    console.log(data);
                     test = JSON.parse(data);
                     createRow(test);
 				}

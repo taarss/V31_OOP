@@ -35,7 +35,14 @@
             $results = $stmt->fetchAll();
             return $results;
         }
-
+        protected function getRandomProducts($category){
+            $sql = "SELECT * FROM products WHERE type = ? ORDER BY RAND()
+            LIMIT 6";
+             $stmt = $this->connect()->prepare($sql);                                                                                                                                                               
+             $stmt->execute([$category]);
+             $results = $stmt->fetchAll();
+             return $results;
+        }
         //Controller
         //Add new Product
         protected function addProduct($name, $price, $description, $manufactur, $type, $gender, $file_path){

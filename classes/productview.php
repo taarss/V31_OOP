@@ -17,4 +17,8 @@
             $result = $this->getProductsOfId($id);
             return $result;
         }
+        public function getRandomProduct($category){
+            $result = $this->getRandomProducts($category);
+            return $result;
+        }
     }

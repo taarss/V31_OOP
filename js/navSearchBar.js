@@ -7,10 +7,13 @@
 
         function load_data(query) {
 			$.ajax({
-				url: "fetchNavSearchBox.php",
+				url: "include/ajaxCall.inc.php",
 				method: "post",
 				data: {
+                    livesearch: 1,
                     query: query,
+                    category: null,
+                    isNav: 1
 				},
 				success: function(data) {       
                     try{
