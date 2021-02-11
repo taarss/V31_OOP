@@ -46,7 +46,7 @@
     }
     //Query livesearch result
     if (isset($_POST['livesearch'])) {
-        $search = new LiveSearch($_POST['query'], $_POST['category']);
+        $search = new LiveSearch($_POST['query'], $_POST['category'], $_POST['isNav']);
         echo json_encode($search->executeQuery());
     }
     //Get all info regarding showcase products

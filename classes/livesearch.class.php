@@ -3,19 +3,30 @@
     class LiveSearch extends Db{
         private $query;
         private $category;
+        private $isNav;
 
-        function __construct($query, $category) {
+        function __construct($query, $category, $isNav) {
             $this->query = $query;
             $this->category = $category;
+            $this->isNav = $isNav;
         }
 
         function executeQuery(){
             if ($this->query != "") {
                 if ($this->category == 0) {
-                    $sql = "SELECT * FROM products
-                    WHERE name LIKE ?
-                    OR id LIKE ?
-                    ";
+                    $sql = "";
+                    if ($this->isNav != null) {
+                        $sql = "SELECT * FROM products
+                        WHERE name LIKE ?
+                        OR id LIKE ? LIMIT 4
+                        ";
+                    }
+                    else {
+                        $sql = "SELECT * FROM products
+                        WHERE name LIKE ?
+                        OR id LIKE ?
+                        ";
+                    }
                     $stmt = $this->connect()->prepare($sql);  
                     $stmt->execute(array("%$this->query%", "%$this->query%"));
                     $results = $stmt->fetchAll();
@@ -32,7 +43,8 @@
                     return $results;
                 }
             }
-            else {
+            else if($this->isNav == null)
+            {
                 if ($this->category != 0) {
                     $sql = "SELECT * FROM products WHERE type = ?";
                      $stmt = $this->connect()->prepare($sql);                                                                                                                                                               
@@ -40,7 +52,7 @@
                      $results = $stmt->fetchAll();
                      return $results;
                 }
-                else {
+                else{
                     $sql = "SELECT * FROM products ORDER BY id LIMIT 20";
                     $stmt = $this->connect()->prepare($sql);                                                                                                                                                               
                     $stmt->execute([]);
