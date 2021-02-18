@@ -105,6 +105,15 @@
             $stmt = $this->connect()->prepare($sql);
             $stmt->execute([$level, $id]); 
         }
+        protected function createInitialAdministrator($name){
+            $sql = 'UPDATE accounts SET adminLevel = ? WHERE username = ?';
+            $stmt = $this->connect()->prepare($sql);
+            $stmt->execute([1, $name]);
+        }
+
+
+
+
 
 
         //Methods

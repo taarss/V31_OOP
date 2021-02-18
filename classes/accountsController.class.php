@@ -23,6 +23,9 @@ use function PHPSTORM_META\elementType;
         public function updateAcivateCode($email, $code){
             $this->updateAcivationCode($email, $code);
         }
+        public function createInitialAdmin($name){
+            $this->createInitialAdministrator($name);
+        }
         public function updateAccountAdminStatus($id, $status){
             if ($this->AccessLevel->validateLevel('manage_accessLevel')) {
                 $this->updateAdminStatus($id, $status);
