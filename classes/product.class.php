@@ -28,7 +28,14 @@
         }
         //Get all products of given id/ids
         protected function getProductsOfId($id){
-            $in  = str_repeat('?,', count($id) - 1) . '?';
+            try{
+                //$in  = str_repeat('?,', count($id) - 1) . '?';
+
+                $in  = 2;
+            }
+            catch(Exception $e) {
+                echo 'No products in database';
+            }
             $sql = "SELECT * FROM products WHERE id IN ($in)";
             $stmt = $this->connect()->prepare($sql);                                                                                                                                                               
             $stmt->execute($id);

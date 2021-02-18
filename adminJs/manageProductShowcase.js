@@ -48,7 +48,6 @@ document.querySelector(".manageProductsShowcaseBtn").onclick = e => {
 				},
 				success: function(data) 
                 {  
-                    console.log(data);
                     test = JSON.parse(data);
                     createRow(test);
 				}

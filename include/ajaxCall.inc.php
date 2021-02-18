@@ -27,6 +27,10 @@
     $apiController = new ApiController();
     $apiView = new ApiView();
     $logsView = new LogView();
+    //Create initial admin
+    if (isset($_POST['createInitialAdmin'])) {
+        $accountController->createInitialAdmin($_POST['adminName']);
+    }
     //Get All Categories
     if (isset($_POST['getCategories'])) {
         $result = $categoryView->getAllCategories();
