@@ -15,5 +15,6 @@ Step 6 - after activating your email press the "finish installation" button.
 
 Step 7 - enter the given info regarding your site. (not optinal).
 
-# ======================================
+PLZ NO SUE ME
+======================================
 My CMS is 100% open source and may be used in all manners.
