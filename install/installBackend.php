@@ -3,7 +3,6 @@
     class Install extends Db{
         public function installBackend(){
             $this->decryptCredentials();
-            $dbname = $this->DATABASE_NAME;
             $sql = "
             CREATE TABLE `accessLevel` (
             `id` int(11) NOT NULL,
@@ -12,6 +11,11 @@
             `manage_api` int(11) NOT NULL DEFAULT 0,
             `manage_accessLevel` int(11) NOT NULL DEFAULT 0
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+            INSERT INTO `accessLevel` (`id`, `manage_products`, `manage_categories`, `manage_api`, `manage_accessLevel`) VALUES
+            (1, 1, 1, 1, 1),
+            (2, 1, 1, 1, 0),
+            (3, 1, 1, 0, 0);
             
             CREATE TABLE `accounts` (
             `id` int(11) NOT NULL,
@@ -39,7 +43,10 @@
             `id` int(11) NOT NULL,
             `isLocked` tinyint(4) NOT NULL
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-            
+
+            INSERT INTO `apiLock` (`id`, `isLocked`) VALUES
+            (1, 1);
+
             CREATE TABLE `categories` (
             `id` int(11) NOT NULL,
             `name` varchar(255) NOT NULL,
@@ -71,6 +78,20 @@
             `id` int(11) NOT NULL,
             `productId` int(11) NOT NULL DEFAULT 8
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+            INSERT INTO `product_showcase` (`id`, `productId`) VALUES
+            (1, 1),
+            (2, 1),
+            (3, 1),
+            (4, 1),
+            (5, 1),
+            (6, 1),
+            (7, 1),
+            (8, 1),
+            (9, 1),
+            (10, 1),
+            (11, 1),
+            (12, 1);
             
             ALTER TABLE `accessLevel`
             ADD PRIMARY KEY (`id`);
@@ -121,6 +142,8 @@
             MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;";
             $stmt = $this->connect()->prepare($sql);
             $stmt->execute(); 
+            unlink('install.php');
+            unlink('installBackend.php');
         }     
     }
     

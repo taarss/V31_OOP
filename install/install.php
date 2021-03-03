@@ -23,7 +23,7 @@
         <title>Installation</title>
         <link rel="stylesheet" href="css/style.css">
     </head>
-    <body>
+    <body class="mainInstall">
         <?php if (!isset($_POST['dbname'])) {?>
             <form method="post" action="install.php">
             <p>Enter database infomation</p>
@@ -36,6 +36,7 @@
         <?php }
         else { ?>
             <form class="regForm" method="post" autocomplete="off">
+              <p>Create your administrator account</p>
           <input
             type="text"
             name="username"
@@ -96,7 +97,7 @@
               let completeBtn = document.createElement("button");
               completeBtn.innerText = "Finish installation";
               completeBtn.addEventListener("click", function(){ 
-                
+                  window.location.href = 'installSettings.php';
                });
               document.querySelector("form").appendChild(completeBtn);      
             }

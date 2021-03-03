@@ -1,4 +1,4 @@
-body{
+.mainInstall{
     background-color: whitesmoke;
     margin-top: 200px;
     form{
@@ -37,5 +37,38 @@ body{
             width: 100%;
         }
 
+    }
+}
+
+.installSettings{
+    background-color: whitesmoke;
+    margin-top: 200px;
+    display: flex;
+    justify-content: center;
+    div{
+        font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        display: flex;
+        background-color: white;
+        min-width: 20%;
+        align-items: center;
+        flex-direction: column;
+        border-radius: 5px;
+        padding-bottom: 30px;
+        box-shadow: 5px 5px 31px -13px #000000;
+        div{
+            box-shadow: none;
+        }
+        form{
+            display: flex;
+            flex-direction: column;
+            .submit{
+                margin-top: 30px;
+                background-color: rgb(103, 103, 238);
+                border: none;
+                border-radius: 3px;
+                color: white;
+                padding: 5px;
+            }
+        }
     }
 }

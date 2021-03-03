@@ -1,0 +1,5 @@
+logo: path.png;
+site_name: my website;
+address: sdfsdfdsf;
+slogan: tøj, kvalitet, simpelt!;
+contact_email: info@fancyness@gmail.com;

@@ -8,6 +8,9 @@
     {
         header('Location: products.php?category=0');
     }
+    include_once 'classes/settingsView.php';
+    $settingsView = new SettingsView();
+    $settings = json_decode($settingsView->viewAllSettings());
     $currentCategory = $_GET['category'];
     $categoryView = new CategoriesView();
     $productView = new ProductView();
@@ -86,7 +89,7 @@
                         <div class="col-12 col-sm-6 col-md-4 col-lg-3 d-block ">
                             <div class="card mb-2 productPageContainer">
                                     <a href="product.php?id=<?=$key['id']?>">
-                                        <img class="card-img-top productImg" src="<?php echo str_replace("/customers/5/f/4/christianvillads.tech/httpd.www/opgaver/V31_OOP/", "", $key['img']);  ?>" alt="Card image cap">
+                                        <img class="card-img-top productImg" src="uploads/<?php echo $key['img'];  ?>" alt="Card image cap">
                                     </a>
                                     <div class="card-body">
                                         <h5><?=$key['name']?></h5>
@@ -101,7 +104,19 @@
     </main>
     
     <footer>
-
+        <div class="contact container">
+            <ul>
+                <li class="bold"><?= $settings->websiteName ?></li>
+                <li><?= $settings->address ?></li>
+                <li><?= $settings->email ?></li>
+                <li>Sitemap</li>
+            </ul>
+            <div class="social">
+                <i class="fa fa-facebook-square" aria-hidden="true"></i>
+                <i class="fa fa-twitter-square" aria-hidden="true"></i>
+                <i class="fa fa-youtube-square" aria-hidden="true"></i>
+            </div>
+        </div>
     </footer>
     <script src="js/productPage.js"></script>
     <script>

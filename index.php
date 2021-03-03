@@ -1,10 +1,14 @@
 <?php 
-    include 'include/autoloader.inc.php';
-    include 'include/startSession.php';
+    include_once 'include/autoloader.inc.php';
+    include_once 'include/startSession.php';
     include_once 'classes/productview.php';
+    include_once 'classes/settingsView.php';
     $productView = new ProductView();
     $productIds = $productView->getAllShowcaseProducts();
     $frontPageProducts = $productView->getAllProductsOfId($productIds);
+    $settingsView = new SettingsView();
+    $settings = json_decode($settingsView->viewAllSettings());
+    echo var_dump($settings);
 ?>
 <!doctype html>
 <html class="no-js" lang="en">
@@ -12,7 +16,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Forside | FancyClothes.dk</title>
+    <title>Forside | <?= $settings->websiteName ?></title>
     <meta name="description" content="Velkommen til FancyClothes.dk">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Find our collection entire online here and find the right Lifewear to suit your style">
@@ -43,7 +47,7 @@
         </ul>
     </div>
     <hr class="hide400">
-    <h1 class="tagline">FancyClothes.DK - tøj, kvalitet, simpelt!</h1>
+    <h1 class="tagline"><?= $settings->websiteName ?> - <?= $settings->slogan ?></h1>
     <hr>
 
     </div>
@@ -104,7 +108,7 @@
                         <div class="col-md-4">
                             <div class="card mb-2">
                                 <a href="product.php?id=<?= $frontPageProducts[$i]['id'] ?>">
-                                <img id="frontPageProductImg" src="<?= str_replace("/customers/5/f/4/christianvillads.tech/httpd.www/opgaver/V31_OOP/", "", $frontPageProducts[$i]['img']) ?>" alt="Card image cap">
+                                <img id="frontPageProductImg" src="uploads/<?= $frontPageProducts[$i]['img'] ?>" alt="Card image cap">
                                 </a>
                                 <div class="card-body">
                                     <h5><?= $frontPageProducts[$i]['name'] ?></h5>
@@ -209,10 +213,9 @@
     <footer>
         <div class="contact container">
             <ul>
-                <li class="bold">FancyClothes.dk</li>
-                <li>Skrædderstien 7</li>
-                <li>4321 Fredensvang</li>
-                <li>E-mail: info@fancyness@gmail.com</li>
+                <li class="bold"><?= $settings->websiteName ?></li>
+                <li><?= $settings->address ?></li>
+                <li><?= $settings->email ?></li>
                 <li>Sitemap</li>
             </ul>
             <div class="social">
