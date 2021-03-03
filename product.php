@@ -7,6 +7,9 @@ $currentProduct[] = $_GET['id'];
 $productView = new ProductView();
 $productInfo = $productView->getAllProductsOfId($currentProduct);
 $recommendedProducts = $productView->getRandomProduct($productInfo[0]['type']);
+include_once 'classes/settingsView.php';
+$settingsView = new SettingsView();
+$settings = json_decode($settingsView->viewAllSettings());
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -34,7 +37,7 @@ $recommendedProducts = $productView->getRandomProduct($productInfo[0]['type']);
                             <p class=" ml-3 text-secondary"><?= $productInfo[0]['manufactur'] . $productInfo[0]['id'] . $productInfo[0]['dateCreated'] ."-". $productInfo[0]['createdBy']?></p>
                         </div>
                         <div class="d-flex justify-content-between w-100">
-                            <img class="ml-3" id="productImg" src="<?php echo str_replace("/customers/5/f/4/christianvillads.tech/httpd.www/opgaver/V31_OOP/", "", $productInfo[0]['img']);  ?>">
+                            <img class="ml-3" id="productImg" src="uploads/<?= $productInfo[0]['img']  ?>">
                             <div id="productBuyMenu" class="col-4 rounded">
                                 <h4 class="m-2"><?= $productInfo[0]['price'] ?>.99 DKK</h4>
                                 <p class="rounded">FREE SHIPPING</p>
@@ -115,7 +118,19 @@ $recommendedProducts = $productView->getRandomProduct($productInfo[0]['type']);
     </main>
     
     <footer>
-
+        <div class="contact container">
+            <ul>
+                <li class="bold"><?= $settings->websiteName ?></li>
+                <li><?= $settings->address ?></li>
+                <li><?= $settings->email ?></li>
+                <li>Sitemap</li>
+            </ul>
+            <div class="social">
+                <i class="fa fa-facebook-square" aria-hidden="true"></i>
+                <i class="fa fa-twitter-square" aria-hidden="true"></i>
+                <i class="fa fa-youtube-square" aria-hidden="true"></i>
+            </div>
+        </div>
     </footer>
     <script>
 		$(".login form").submit(function(event) {

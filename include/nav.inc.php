@@ -14,7 +14,7 @@
     </div>
     <hr>
     <div class="container home">
-        <a href="index.php"><img src="img/homeIcon.png" alt="Forside ikon"></a>
+        <a href="index.php"><img src="uploads/<?= $settings->logo ?>" alt="Forside ikon"></a>
         <!-- Velkomstbesked -->
         <h2>Velkommen <?= $_SESSION['name'] ?>!</h2>
     </div>

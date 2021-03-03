@@ -13,7 +13,7 @@
         public function addNewProduct($id, $productName, $price, $description, $manufactur, $category, $gender, $file){
             if ($this->AccessLevel->validateLevel('manage_products')) {
                 $upload = new Image($file);
-                $image = realpath($upload->uploadImage());
+                $image = $upload->uploadImage();
                 $this->addProduct($productName,$price, $description, $manufactur, $category,$gender,$image);
                 $this->LogController->createNewLog("created product[" . $productName ."]");
                 header('Location: ../adminPanel.php');

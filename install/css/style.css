@@ -1,9 +1,9 @@
-body {
+.mainInstall {
   background-color: whitesmoke;
   margin-top: 200px;
 }
 
-body form {
+.mainInstall form {
   padding-top: 50px;
   -webkit-box-align: center;
       -ms-flex-align: center;
@@ -23,13 +23,13 @@ body form {
   border-radius: 3px;
 }
 
-body form input {
+.mainInstall form input {
   width: 80%;
   margin: 4px;
   padding: 3px;
 }
 
-body form input:last-of-type {
+.mainInstall form input:last-of-type {
   margin-top: 40px;
   margin-bottom: 30px;
   background-color: #6767ee;
@@ -39,7 +39,7 @@ body form input:last-of-type {
   padding: 5px;
 }
 
-body form button {
+.mainInstall form button {
   margin-top: 40px;
   margin-bottom: 30px;
   background-color: #6767ee;
@@ -48,5 +48,60 @@ body form button {
   color: white;
   padding: 5px;
   width: 100%;
+}
+
+.installSettings {
+  background-color: whitesmoke;
+  margin-top: 200px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.installSettings div {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  background-color: white;
+  min-width: 20%;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  border-radius: 5px;
+  padding-bottom: 30px;
+  -webkit-box-shadow: 5px 5px 31px -13px #000000;
+          box-shadow: 5px 5px 31px -13px #000000;
+}
+
+.installSettings div div {
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.installSettings div form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.installSettings div form .submit {
+  margin-top: 30px;
+  background-color: #6767ee;
+  border: none;
+  border-radius: 3px;
+  color: white;
+  padding: 5px;
 }
 /*# sourceMappingURL=style.css.map */
