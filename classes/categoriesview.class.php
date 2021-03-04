@@ -11,4 +11,8 @@
             $results = $this->getCategories();
             return $results;
         }
+        public function getAllHeadCategories(){
+            $results = $this->getHeadCategories();
+            return $results;
+        }
     }

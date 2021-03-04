@@ -1,4 +1,4 @@
-document.querySelector(".manageCategoriesBtn").onclick = e => {
+document.querySelector(".manageHeadCategoriesBtn").onclick = e => {
     let catagories;
     let adp_underlay = document.createElement('div');
     adp_underlay.className = 'adp-underlay';
@@ -8,55 +8,27 @@ document.querySelector(".manageCategoriesBtn").onclick = e => {
     adp.setAttribute("class", "col-8 adp")
     adp.innerHTML = `
     <button class="adpBtn col-1 button bg-danger text-light border-0">X</button>
-    <h3>Manage Categories</h3>
+    <h3>Manage Head Categories</h3>
     <div class="manageCategoriesTable d-flex flex-wrap">
-        <h4 class="col-2">Name</h4>
+        <h4 class="col-3">Name</h4>
         <h4 class="col-3">Image</h4>
-        <h4 class="col-3">Update/delete related products</h4>
-        <h4 class="col-2">Head category</h4>
-        <h4 class="col-2">Options</h4>
+        <h4 class="col-3">Delete related sub-categories</h4>
+        <h4 class="col-3">Options</h4>
     </div>
     `;
-    function getCategories(comboBox, selectedId) {
-        $.ajax({
-            url: 'include/ajaxCall.inc.php',
-            type: 'post',
-            data: {
-                "getHeadCategories": 1,
-            },
-            success: function(data) {
-                console.log(data)
-                JSON.parse(data).forEach(element => {
-                    let option2 = document.createElement("option");
-                    let option = document.createElement("option");
-                    option.setAttribute("value", element["id"]);   
-                    option2.setAttribute("value", element["id"]);    
-                    option.innerHTML = element["name"];
-                    option2.innerHTML = element["name"];                                    
-                    if (element["id"] == selectedId) {
-                        option.selected = "selected";
-                    }
-                    comboBox.appendChild(option);         
-
-                });
-                addCategoriesOnce = false;
-            }
-        });
-    }
-
 
     $.ajax({
         url: 'include/ajaxCall.inc.php',
         type: 'post',
         data: {
-                "getCategories": 1,
+                "getHeadCategories": 1,
             },
         success: function(data) {
             JSON.parse(data).forEach(element => {
                 let rowForm = document.createElement("form");
                 rowForm.setAttribute("enctype", "multipart/form-data");
                 let dataTypeInput = document.createElement("input");
-                dataTypeInput.setAttribute("name", "updateCategory");
+                dataTypeInput.setAttribute("name", "updateHeadCategory");
                 dataTypeInput.value = 1;
                 dataTypeInput.style.display = "none";
                 rowForm.appendChild(dataTypeInput);
@@ -64,7 +36,7 @@ document.querySelector(".manageCategoriesBtn").onclick = e => {
                 nameInput.setAttribute("type", "text");
                 nameInput.setAttribute("value", element["name"]);
                 nameInput.setAttribute("name", "name");
-                nameInput.setAttribute("class", "col-2 categoryNameUpdateInput");
+                nameInput.setAttribute("class", "col-3 categoryNameUpdateInput");
                 rowForm.appendChild(nameInput);
                 let imageInput = document.createElement("input");
                 imageInput.setAttribute("type", "file");
@@ -90,10 +62,6 @@ document.querySelector(".manageCategoriesBtn").onclick = e => {
                 rowForm.appendChild(label1);
                 rowForm.appendChild(radio2);
                 rowForm.appendChild(label2);
-                let headcategoryInput = document.createElement("select");
-                headcategoryInput.setAttribute("class", "col-1 mx-2 manageHeadCategoryInput");
-                headcategoryInput.setAttribute("name", "headcategory");
-                rowForm.appendChild(headcategoryInput);
                 rowForm.setAttribute("action", "include/ajaxCall.inc.php")
                 rowForm.setAttribute("method", "post")
                 let saveChangesInput = document.createElement("input");
@@ -105,7 +73,7 @@ document.querySelector(".manageCategoriesBtn").onclick = e => {
                 deleteData.innerHTML = "delete";
                 deleteData.setAttribute("class", "col-1 border border-dark bg-danger text-white");
                 deleteData.addEventListener('click', function(){
-                    deleteCategory(this.parentElement.querySelector(".categoryId").value,
+                    deleteHeadCategory(this.parentElement.querySelector(".categoryId").value,
                     this.parentElement.querySelector('input[name = "updateDelete"]:checked').value, 
                     );
                 });
@@ -119,7 +87,6 @@ document.querySelector(".manageCategoriesBtn").onclick = e => {
                 categoryId.setAttribute("class", "categoryId");
                 rowForm.appendChild(categoryId);
                 document.querySelector(".manageCategoriesTable").appendChild(rowForm);
-                getCategories(headcategoryInput, element["headCategory"]);
             });
         }
     });
@@ -139,12 +106,12 @@ document.querySelector(".manageCategoriesBtn").onclick = e => {
         });
     });
 
-    function deleteCategory(id, productRealtion) {
+    function deleteHeadCategory(id, productRealtion) {
         $.ajax({
             url: 'include/ajaxCall.inc.php',
             type: 'post',
             data: {
-                "deleteCategory": 1,
+                "deleteHeadCategory": 1,
                 "productRealation": productRealtion,
                 "id": id,
             },

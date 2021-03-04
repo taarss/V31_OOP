@@ -9,23 +9,44 @@
             $results = $stmt->fetchAll();
             return $results;
         }
+        //Get all head categories
+        protected function getHeadCategories(){
+            $sql = "SELECT * FROM head_categories";
+            $stmt = $this->connect()->prepare($sql);
+            $stmt->execute();
+            $results = $stmt->fetchAll();
+            return $results;
+        }
         //Update category
-        protected function updateCategory($name, $id, $icon){
+        protected function updateCategory($name, $id, $icon, $headCategory){
             if ($icon != null) {
-                $sql = "UPDATE categories SET name = ?, icon = ? WHERE id = ?";
+                $sql = "UPDATE categories SET name = ?, icon = ?, headCategory = ? WHERE id = ?";
+                $stmt = $this->connect()->prepare($sql);
+                $stmt->execute([$name, $icon, $headCategory, $id]);
+            }
+            else {
+                $sql = "UPDATE categories SET name = ?, headCategory = ? WHERE id = ?";
+                $stmt = $this->connect()->prepare($sql);
+                $stmt->execute([$name, $headCategory, $id]);
+            }
+        }
+        protected function updateHeadCategory($name, $id, $icon){
+            if ($icon != null) {
+                $sql = "UPDATE head_categories SET name = ?, icon = ? WHERE id = ?";
                 $stmt = $this->connect()->prepare($sql);
                 $stmt->execute([$name, $icon, $id]);
             }
             else {
-                $sql = "UPDATE categories SET name = ? WHERE id = ?";
+                $sql = "UPDATE head_categories SET name = ? WHERE id = ?";
                 $stmt = $this->connect()->prepare($sql);
                 $stmt->execute([$name, $id]);
             }
         }
-        protected function createCategory($name, $icon){
-            $sql = "INSERT INTO categories (name, icon) VALUES (?, ?)";
+        //Create category
+        protected function createCategory($name, $icon, $headCategory){
+            $sql = "INSERT INTO categories (name, icon, headCategory) VALUES (?, ?, ?)";
             $stmt = $this->connect()->prepare($sql);
-            $stmt->execute([$name, $icon]);
+            $stmt->execute([$name, $icon, $headCategory]);
         }
         //Delete category
         protected function deleteCategory($id, $productRelation){
@@ -38,4 +59,24 @@
             $stmt = $this->connect()->prepare($sql);
             $stmt->execute([$id]);
         }
+        //Delete head category
+        protected function deleteHeadCategory($id, $productRelation){
+            $sql = "DELETE FROM head_categories WHERE id = ?";
+            if ($productRelation == "1") {
+                $relation = "DELETE categories, products FROM categories  
+                INNER JOIN products ON categories.id=products.type  
+                WHERE categories.headCategory = ?";
+                $stmt = $this->connect()->prepare($relation);
+                $stmt->execute([$id]);
+            }
+            $stmt = $this->connect()->prepare($sql);
+            $stmt->execute([$id]);
+        }
+        //Create head category
+        protected function createHeadCategory($name, $icon){
+            $sql = "INSERT INTO head_categories (name, icon) VALUES (?, ?)";
+            $stmt = $this->connect()->prepare($sql);
+            $stmt->execute([$name, $icon]);
+        }
     }
+
