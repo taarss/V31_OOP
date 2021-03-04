@@ -1,5 +1,8 @@
 <?php 
     include 'include/autoloader.inc.php';
+    include_once 'classes/settingsView.php';
+    $settingsView = new SettingsView();
+    $settings = json_decode($settingsView->viewAllSettings());
     $accountView = new AccountView();
     $accountView->checkLoggedIn();
     $currentPage = 'adminpanel';
@@ -48,14 +51,25 @@
             </div>
         </div> 
         <div class="border rounded p-5 col-2 m-3 shadow" id="adminCategories">
-            <h5>Categories</h5>
+            <h5>Sub-Categories</h5>
             <div>
-                <p class="m-0 mt-2">Add categories</p>
+                <p class="m-0 mt-2">Add sub-categories</p>
                 <button class="addCategoriesBtn">Add</button>
             </div>
             <div>
-                <p class="m-0 mt-2">Manage categories</p>
+                <p class="m-0 mt-2">Manage sub-categories</p>
                 <button class="manageCategoriesBtn">Manage</button>
+            </div>
+        </div>
+        <div class="border rounded p-5 col-2 m-3 shadow" id="adminHeadCategories">
+            <h5>Head-Categories</h5>
+            <div>
+                <p class="m-0 mt-2">Add Head-categories</p>
+                <button class="addHeadCategoriesBtn">Add</button>
+            </div>
+            <div>
+                <p class="m-0 mt-2">Manage Head-categories</p>
+                <button class="manageHeadCategoriesBtn">Manage</button>
             </div>
         </div>
         <div class="border rounded p-5 col-3 m-3 shadow" id="adminApiKey">
@@ -113,7 +127,9 @@
     <script src="adminJs/manageProducts.js"></script>
     <script src="adminJs/addProduct.js"></script>
     <script src="adminJs/manageCategories.js"></script>
+    <script src="adminJs/manageHeadCategories.js"></script>
     <script src="adminJs/addCategories.js"></script>
+    <script src="adminJs/addHeadCategory.js"></script>
     <script src="js/plugins.js"></script>
     <script src="js/myScript.js"></script>
     <script src="js/navSearchBar.js"></script>

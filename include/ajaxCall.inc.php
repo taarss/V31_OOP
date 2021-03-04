@@ -36,6 +36,11 @@
         $result = $categoryView->getAllCategories();
         echo json_encode($result);
     }
+    //Get all head categories
+    if (isset($_POST['getHeadCategories'])) {
+        $result = $categoryView->getAllHeadCategories();
+        echo json_encode($result);
+    }
     //Add new product
     if (isset($_POST['post_price'])) {
         $productController->addNewProduct($_SESSION['id'], $_POST['post_name'], $_POST['post_price'], $_POST['post_description'], $_POST['post_manufactur'], $_POST['post_type'], $_POST['clothingsex'], $_FILES);      
@@ -65,15 +70,27 @@
     }
     //Update a category
     if (isset($_POST['updateCategory'])) {
-        $categoryController->updateCategories($_POST['name'], $_POST['id'], $_FILES);
+        $categoryController->updateCategories($_POST['name'], $_POST['id'], $_FILES, $_POST['headcategory']);
+    }
+    //Update head category
+    if (isset($_POST['updateHeadCategory'])) {
+        $categoryController->updateHeadCategories($_POST['name'], $_POST['id'], $_FILES);
     }
     //Create new category
     if (isset($_POST['createCategory'])) {
-        $categoryController->createNewCategory($_POST['post_name'], $_FILES);
+        $categoryController->createNewCategory($_POST['post_name'], $_FILES, $_POST['category_header']);
     }
     //Delete category
     if (isset($_POST['deleteCategory'])) {
         $categoryController->deleteCategories($_POST['id'], $_POST['productRealation']);
+    }
+    //Delete head catecory
+    if (isset($_POST['deleteHeadCategory'])) {
+        $categoryController->deleteHeadCategoriess($_POST['id'], $_POST['productRealation']);
+    }
+    //Create new head category
+    if (isset($_POST['createHeadCategory'])) {
+        $categoryController->createNewHeadCategory($_POST['post_name'], $_FILES);
     }
     //Get none administrator accounts
     if (isset($_POST['getNoneAdminAccounts'])) {
