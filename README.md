@@ -21,4 +21,3 @@ Step 7 - enter the requested infomation regarding your site. (not optinal).
 
 Extra
 ======================================
-My CMS is 100% open source and may be used in all manners.
