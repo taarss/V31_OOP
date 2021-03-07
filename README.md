@@ -13,7 +13,7 @@ Step 5 - activate your email(the email may be in your junk folder).
 
 Step 6 - after activating your email press the "finish installation" button.
 
-Step 7 - enter the given info regarding your site. (not optinal).
+Step 7 - enter the requested infomation regarding your site. (not optinal).
 
 
 
