@@ -10,11 +10,11 @@
             $this->AccessLevel = new AccessLevel($_SESSION['id']);
             $this->LogController = new LogController();
         }
-        public function addNewProduct($id, $productName, $price, $description, $manufactur, $category, $gender, $file){
+        public function addNewProduct($id, $productName, $price, $description, $manufactur, $category, $file){
             if ($this->AccessLevel->validateLevel('manage_products')) {
                 $upload = new Image($file);
                 $image = $upload->uploadImage();
-                $this->addProduct($productName,$price, $description, $manufactur, $category,$gender,$image);
+                $this->addProduct($productName,$price, $description, $manufactur, $category,$image);
                 $this->LogController->createNewLog("created product[" . $productName ."]");
                 header('Location: ../adminPanel.php');
             }
@@ -23,14 +23,14 @@
             }
     
         }
-         public function updateNewProduct($productName, $price, $description, $manufactur, $category, $gender, $file, $id){
+         public function updateNewProduct($productName, $price, $description, $manufactur, $category, $file, $id){
             if ($this->AccessLevel->validateLevel('manage_products')) {
                 $image = null;
                 if ($file['post_img']['error'] != 4) {
                     $upload = new Image($file);
                     $image = realpath($upload->uploadImage());
                 }
-                $this->updateProduct($productName,$price, $description, $manufactur, $category,$gender,$image, $id);
+                $this->updateProduct($productName,$price, $description, $manufactur, $category,$image, $id);
                 $this->LogController->createNewLog("updated product[" . $id ."]");
                 header('Location: ../adminPanel.php');
                 }

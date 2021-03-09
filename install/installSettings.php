@@ -3,7 +3,6 @@
     if (isset($_POST['websiteName'])) {
         $settingsController = new SettingsController();
         $settingsController->writeSetting($_POST);
-        unlink('installSettings.php');
         header("Location: ../index.php");
     }
 ?>

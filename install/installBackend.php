@@ -34,6 +34,12 @@
             `last_heartbeat` date DEFAULT NULL
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
             
+            CREATE TABLE `head_categories` (
+                `id` int(11) NOT NULL,
+                `name` varchar(255) NOT NULL,
+                `icon` varchar(255) NOT NULL
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
             CREATE TABLE `apiKey` (
             `id` int(11) NOT NULL,
             `apiKey` varchar(255) NOT NULL
@@ -50,7 +56,9 @@
             CREATE TABLE `categories` (
             `id` int(11) NOT NULL,
             `name` varchar(255) NOT NULL,
-            `icon` varchar(255) NOT NULL
+            `icon` varchar(255) NOT NULL,
+            `headCategory` varchar(255) NOT NULL
+
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
             
             CREATE TABLE `logs` (
@@ -70,7 +78,6 @@
             `manufactur` varchar(300) NOT NULL,
             `type` varchar(10) NOT NULL,
             `saleValue` varchar(11) DEFAULT '0',
-            `sex` varchar(10) NOT NULL DEFAULT 'unisex',
             `createdBy` int(11) NOT NULL
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
             
@@ -81,18 +88,19 @@
 
             INSERT INTO `product_showcase` (`id`, `productId`) VALUES
             (1, 1),
-            (2, 1),
-            (3, 1),
-            (4, 1),
-            (5, 1),
-            (6, 1),
-            (7, 1),
-            (8, 1),
-            (9, 1),
-            (10, 1),
-            (11, 1),
-            (12, 1);
-            
+            (2, 2),
+            (3, 3),
+            (4, 4),
+            (5, 5),
+            (6, 6),
+            (7, 7),
+            (8, 8),
+            (9, 9),
+            (10, 10),
+            (11, 11),
+            (12, 12);
+
+
             ALTER TABLE `accessLevel`
             ADD PRIMARY KEY (`id`);
             
@@ -116,6 +124,9 @@
             
             ALTER TABLE `product_showcase`
             ADD PRIMARY KEY (`id`);
+
+            ALTER TABLE `head_categories`
+            ADD PRIMARY KEY (`id`);
             
             ALTER TABLE `accessLevel`
             MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
@@ -131,6 +142,9 @@
             
             ALTER TABLE `categories`
             MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+            ALTER TABLE `head_categories`
+            MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
             
             ALTER TABLE `logs`
             MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
@@ -139,7 +153,11 @@
             MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
             
             ALTER TABLE `product_showcase`
-            MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;";
+            MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+            
+            INSERT INTO `products` (`id`, `name`, `price`, `isOnSale`, `img`, `description`, `dateCreated`, `manufactur`, `type`, `saleValue`, `createdBy`) VALUES (3, '123', '123', 0, 'filler.jpg', '123', '2021-03-09', '123', '2', '0', 1), (4, '123', '123', 0, 'filler.jpg', '123', '2021-03-09', '123', '2', '0', 1), (5, '123', '123', 0, 'filler.jpg', '123', '2021-03-09', '123', '2', '0', 1), (6, '123', '123', 0, 'filler.jpg', '123', '2021-03-09', '123', '2', '0', 1), (7, '123', '123', 0, 'filler.jpg', '123', '2021-03-09', '123', '2', '0', 1), (8, '123', '123', 0, 'filler.jpg', '123', '2021-03-09', '123', '2', '0', 1), (9, '123', '123', 0, 'filler.jpg', '123', '2021-03-09', '123', '2', '0', 1), (10, '123', '123', 0, 'filler.jpg', '123', '2021-03-09', '123', '2', '0', 1), (11, '123', '123', 0, 'filler.jpg', '123', '2021-03-09', '123', '2', '0', 1), (12, '123', '123', 0, 'filler.jpg', '123', '2021-03-09', '123', '2', '0', 1)
+            ";
+
             $stmt = $this->connect()->prepare($sql);
             $stmt->execute(); 
             unlink('install.php');

@@ -28,6 +28,9 @@
 <body>
     <?php include 'include/nav.inc.php' ?>
     <main id="header" class="d-flex my-5 flex-wrap">
+        <div class="adminHeaderBtns  m-3">
+            <button class="editSiteInfoBtn">Edit website info</button>
+        </div>
         <div class="border rounded p-5 col-4 m-3 shadow" id="adminProducts">
             <h5>Products</h5>
             <div>
@@ -117,6 +120,13 @@
                 </div>
             </div>
         </div>
+    <script>
+        document.querySelector(".editSiteInfoBtn").addEventListener("click", function(){
+            window.location.href = 'install/installSettings.php';
+            console.log("log");
+        })
+
+    </script>
     <script src="adminJs/toggleApiLock.js"></script>
     <script src="adminJs/manageAccounts.js"></script>
     <script src="adminJs/manageProductShowcase.js"></script>

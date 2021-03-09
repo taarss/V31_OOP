@@ -4,11 +4,12 @@
     include_once 'classes/productview.php';
     include_once 'classes/settingsView.php';
     $productView = new ProductView();
+    $categoriesObj = new CategoriesView();
     $productIds = $productView->getAllShowcaseProducts();
     $frontPageProducts = $productView->getAllProductsOfId($productIds);
     $settingsView = new SettingsView();
     $settings = json_decode($settingsView->viewAllSettings());
-    echo var_dump($settings);
+    $headCategories = $categoriesObj->getAllHeadCategories();
 ?>
 <!doctype html>
 <html class="no-js" lang="en">
@@ -60,7 +61,6 @@
                 <div class="catMain">
                     <ul>
                         <?php 
-                            $categoriesObj = new CategoriesView();
                             $categoriesObj->listCategories();
                         ?>
                     </ul>
@@ -86,16 +86,15 @@
             <h3>INSPIRATION</h3>
             <hr>
             <div class="inspiration">
-                <div class="catMen">
-                    <img src="img/kategoriHerre.jpg" alt="">
-                    <h5>Herretøj</h5>
-                    <div class="action"><a href="products.php?category=0&gender=male" class="genderMale">Se mere</a></div>
-                </div>
-                <div class="catWomen">
-                    <img src="img/kategoriKvinde.jpg" alt="">
-                    <h5>Kvindetøj</h5>
-                    <div class="action"><a href="products.php?category=0&gender=female" class="genderMale">Se mere</a></div>
-                </div>
+            <?php foreach ($headCategories as $headCategory) {?>
+                    <div class="frontpageHeadCategory headCategory">
+                        <img src="uploads/<?= $headCategory['icon'] ?>" alt="">
+                        <h5><?= $headCategory['name'] ?></h5>
+                        <div class="action">
+                            <a href="products.php?category=0&mainCategory=<?= $headCategory['id'] ?>" class="newHeadBtn">Se mere<span style="display: none;"><?= $headCategory['id'] ?></span></a>
+                        </div>
+                    </div>  
+               <?php } ?>
             </div>
             <div id="multi-item-example" class="carousel slide carousel-multi-item col-12" data-ride="carousel">
             <!--Slides-->

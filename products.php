@@ -15,21 +15,22 @@
     $categoryView = new CategoriesView();
     $productView = new ProductView();
     $categories = $categoryView->getAllCategories();
+    $headCategories = $categoryView->getAllHeadCategories();
     $products;
 
 
-    if ($currentCategory != "0") {
+    if ($currentCategory != "0" && $_GET['mainCategory'] == null) {
         $products = $productView->getProductOfCategory($currentCategory);
     }
     else {
         $products = $productView->getAllproducts();
     }
-    if (isset($_GET['gender'])) {
-        $products = array_filter($products, "filterByGender");
+    if (isset($_GET['mainCategory'])) {
+        $products = $productView->getProductsOfHeadcategory($_GET['mainCategory'], $_GET['category'] );
+       
     }
-    function filterByGender($productArray)
-    {
-        if ($productArray['sex'] == $_GET['gender']) {
+    function filterBySubCategory($productArray){
+        if ($productArray['type'] == $_GET['category']) {
             return $productArray;
         }
     }
@@ -61,21 +62,17 @@
         <div class="col-9 pt-5 mt-5" style="background-color: ghostWhite; min-height: 100vh">
         <div class="products">
             <div class="inspiration">
-                <div class="catMen">
-                    <img src="img/kategoriHerre.jpg" alt="">
-                    <h5>Herretøj</h5>
-                    <div class="action"><a href="#" class="genderMale">Se mere</a></div>
-                </div>
-                <div class="catWomen">
-                    <img src="img/kategoriKvinde.jpg" alt="">
-                    <h5>Kvindetøj</h5>
-                    <div class="action"><a href="#" class="genderFemale">Se mere</a></div>
-                </div>
-                <div class="catWomen">
-                    <img src="img/unisex.jpeg" alt="">
-                    <h5>Unisex</h5>
-                    <div class="action"><a href="#" class="genderUnisex">Se mere</a></div>
-                </div>
+                <?php foreach ($headCategories as $headCategory) {?>
+                    <div class="headCategory">
+                        <img src="uploads/<?= $headCategory['icon'] ?>" alt="">
+                        <h5><?= $headCategory['name'] ?></h5>
+                        <div class="action">
+                            <a href="#" class="newHeadBtn">Se mere<span style="display: none;"><?= $headCategory['id'] ?></span></a>
+                        </div>
+                    </div>  
+               <?php } ?>
+                
+                
             </div>
         </div>
         

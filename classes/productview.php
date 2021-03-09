@@ -21,4 +21,8 @@
             $result = $this->getRandomProducts($category);
             return $result;
         }
+        public function getProductsOfHeadcategory($head, $sub){
+            $result = $this->getAllProductsOfHeadAndSub($head, $sub);
+            return $result;
+        }
     }

@@ -43,24 +43,48 @@
              $results = $stmt->fetchAll();
              return $results;
         }
-        //Controller
-        //Add new Product
-        protected function addProduct($name, $price, $description, $manufactur, $type, $gender, $file_path){
-            $sql = "INSERT INTO products (name, price, description, manufactur, type, img, sex, createdBy) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-            $stmt = $this->connect()->prepare($sql);                                                                                                                                                               
-            $stmt->execute([$name, $price, $description, $manufactur, $type, $file_path, $gender, $_SESSION['id']['id']]);;
-        }
-        //Update product
-        protected function updateProduct($name, $price, $description, $manufactur, $type, $gender, $file_path, $id){
-            if ($file_path != null) {
-                $sql = "UPDATE products SET name = ?, price = ?, description = ?, manufactur = ?, type = ?, img = ?, sex = ? WHERE id = ?"; 
+        //Get head category of products
+        protected function getAllProductsOfHeadAndSub($headcategory, $subcategory){
+            //Select all products where their sub category is apart of the given head category
+            /*$sql = "SELECT * FROM products INNER JOIN categories ON products.type = categories.id 
+            WHERE categories.headCategory = ?";*/
+            $sql = "";
+            if ($subcategory == 0) {
+                $sql = "SELECT p.id, p.name, p.price, p.img FROM products AS p INNER JOIN categories AS s ON p.type = s.id WHERE
+                s.headCategory = ? ";
                 $stmt = $this->connect()->prepare($sql);                                                                                                                                                               
-                $stmt->execute([$name, $price, $description, $manufactur, $type, $file_path, $gender, $id]);
+                $stmt->execute([$headcategory]);
+                $results = $stmt->fetchAll(); 
+                return $results;
             }
             else{
-                $sql = "UPDATE products SET name = ?, price = ?, description = ?, manufactur = ?, type = ?, sex = ? WHERE id = ?"; 
+                $sql = "SELECT p.id, p.name, p.price, p.img FROM products AS p INNER JOIN categories AS s ON p.type = s.id WHERE
+                s.headCategory = ? AND s.id = ?";
                 $stmt = $this->connect()->prepare($sql);                                                                                                                                                               
-                $stmt->execute([$name, $price, $description, $manufactur, $type, $gender, $id]);
+                $stmt->execute([$headcategory, $subcategory]);
+                $results = $stmt->fetchAll(); 
+                return $results;
+            }
+        }
+        //Controller
+        //Add new Product
+        protected function addProduct($name, $price, $description, $manufactur, $type, $file_path){
+            
+            $sql = "INSERT INTO products (name, price, description, manufactur, type, img,  createdBy) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            $stmt = $this->connect()->prepare($sql);                                                                                                                                                               
+            $stmt->execute([$name, $price, $description, $manufactur, $type, $file_path,  $_SESSION['id']['id']]);;
+        }
+        //Update product
+        protected function updateProduct($name, $price, $description, $manufactur, $type,  $file_path, $id){
+            if ($file_path != null) {
+                $sql = "UPDATE products SET name = ?, price = ?, description = ?, manufactur = ?, type = ?, img = ? WHERE id = ?"; 
+                $stmt = $this->connect()->prepare($sql);                                                                                                                                                               
+                $stmt->execute([$name, $price, $description, $manufactur, $type, $file_path, $id]);
+            }
+            else{
+                $sql = "UPDATE products SET name = ?, price = ?, description = ?, manufactur = ?, type = ? WHERE id = ?"; 
+                $stmt = $this->connect()->prepare($sql);                                                                                                                                                               
+                $stmt->execute([$name, $price, $description, $manufactur, $type,  $id]);
             }
             
         }
