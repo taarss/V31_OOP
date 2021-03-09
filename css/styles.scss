@@ -239,22 +239,26 @@ main {
         .inspiration {
             display: flex;
             width: 100%;
+            flex-wrap: wrap;
+            justify-content: center;
 
-            img {
-                width: 100%;
-                opacity: 0.7;
-                transition: all 0.3s;
-
-                &:hover {
-                    opacity: 1;
-                }
+            
+            .frontpageHeadCategory{
+                width: 45% !important;
             }
-
-            .catMen {
-                flex: 1;
+            .headCategory {
                 position: relative;
                 margin: 5px 10px;
-
+                width: 30%;
+                img {
+                    opacity: 0.7;
+                    height: 250px;
+                    transition: all 0.3s;
+                    width: 100%;
+                    &:hover {
+                        opacity: 1;
+                    }
+                }
                 h5 {
                     position: absolute;
                     top: 20px;
@@ -537,6 +541,10 @@ h6 {
         display: none;
     }
 }
+.adminHeaderBtns{
+    width: 100%;
+}
+
 
 #adminProducts{
     background-color: rgb(181, 225, 174);

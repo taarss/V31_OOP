@@ -267,28 +267,36 @@ main .products .inspiration {
   display: -ms-flexbox;
   display: flex;
   width: 100%;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
-main .products .inspiration img {
-  width: 100%;
+main .products .inspiration .frontpageHeadCategory {
+  width: 45% !important;
+}
+
+main .products .inspiration .headCategory {
+  position: relative;
+  margin: 5px 10px;
+  width: 30%;
+}
+
+main .products .inspiration .headCategory img {
   opacity: 0.7;
+  height: 250px;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
+  width: 100%;
 }
 
-main .products .inspiration img:hover {
+main .products .inspiration .headCategory img:hover {
   opacity: 1;
 }
 
-main .products .inspiration .catMen {
-  -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
-  position: relative;
-  margin: 5px 10px;
-}
-
-main .products .inspiration .catMen h5 {
+main .products .inspiration .headCategory h5 {
   position: absolute;
   top: 20px;
   left: 20px;
@@ -297,7 +305,7 @@ main .products .inspiration .catMen h5 {
   color: black;
 }
 
-main .products .inspiration .catMen div {
+main .products .inspiration .headCategory div {
   position: absolute;
   top: 100px;
   left: 20px;
@@ -597,6 +605,10 @@ h6 {
   .hide400 {
     display: none;
   }
+}
+
+.adminHeaderBtns {
+  width: 100%;
 }
 
 #adminProducts {

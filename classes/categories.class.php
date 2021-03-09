@@ -17,6 +17,14 @@
             $results = $stmt->fetchAll();
             return $results;
         }
+        //Get all categories within the given head category
+        protected function getCategoriesOfHeadCategories($head){
+            $sql = "SELECT * FROM categories WHERE headCategory = ?";
+            $stmt = $this->connect()->prepare($sql);
+            $stmt->execute([$head]);
+            $results = $stmt->fetchAll();
+            return $results;
+        }
         //Update category
         protected function updateCategory($name, $id, $icon, $headCategory){
             if ($icon != null) {

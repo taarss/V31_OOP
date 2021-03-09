@@ -1,52 +1,72 @@
 let queryString = window.location.search;
 let urlParams = new URLSearchParams(queryString);
 let selectedId = urlParams.get('category');
+let headCategory = urlParams.get('mainCategory');
 
-        
-        $.ajax({
-            url: 'include/ajaxCall.inc.php',
-            type: 'post',
-            data: {
-                "getCategories": 1,
-            },
-            success: function(data) {
-                console.log(data);
-                JSON.parse(data).forEach(element => {
-                    let option = document.createElement("option");
-                    option.setAttribute("value", element["id"]);   
-                    option.innerHTML = element["name"];
-                    if (element["id"] == selectedId) {
-                        option.selected = "selected";
-                    }
-                    document.querySelector(".productPageSearch").appendChild(option);                
-                });
-                document.querySelector(".productPageSearch").onchange = function(){
-                    viewNewCategory(this.value);
-                };
-            }
-        });
-        document.querySelector(".genderMale").addEventListener("click", function(){
-            viewNewGender("male");
-          });
-          document.querySelector(".genderFemale").addEventListener("click", function(){
-            viewNewGender("female");
-          });
-          document.querySelector(".genderUnisex").addEventListener("click", function(){
-            viewNewGender("unisex");
-          });
-        function viewNewCategory(newCategory) {
-            const queryString = window.location.search;
-            const urlParams = new URLSearchParams(queryString);
-            const gender = urlParams.get('gender')
-            if (gender) {
-                window.location.href = "https://christianvillads.tech/opgaver/V31_OOP/products.php?category="+newCategory+"&gender="+gender;
-            }
-            else{
-                window.location.href = "https://christianvillads.tech/opgaver/V31_OOP/products.php?category="+newCategory;
-            }
+        if (headCategory == null) {
+            $.ajax({
+                url: 'include/ajaxCall.inc.php',
+                type: 'post',
+                data: {
+                    "getCategories": 1,
+                },
+                success: function(data) {
+                    parseCategories(data);
+                }
+            });
         }
-        function viewNewGender(newGender) {
-            window.location.href = "https://christianvillads.tech/opgaver/V31_OOP/products.php?category=0&gender="+newGender;
+        else{
+            $.ajax({
+                url: 'include/ajaxCall.inc.php',
+                type: 'post',
+                data: {
+                    "getCategoriesOfHead": 1,
+                    "headCategory": headCategory
+                },
+                success: function(data) {
+                    parseCategories(data);
+                }
+            });
+        }
+        
+        function parseCategories(data){
+                console.log(data);
+                    JSON.parse(data).forEach(element => {
+                        let option = document.createElement("option");
+                        option.setAttribute("value", element["id"]);   
+                        option.innerHTML = element["name"];
+                        if (element["id"] == selectedId) {
+                            option.selected = "selected";
+                        }
+                        document.querySelector(".productPageSearch").appendChild(option);                
+                    });
+                    document.querySelector(".productPageSearch").onchange = function(){
+                        viewNewCategory(this.value);
+                    };
+        }
+        document.querySelectorAll(".newHeadBtn").forEach(btn => 
+            btn.addEventListener("click", function(){
+                console.log("works");
+                viewNewHeadCategory(this.querySelector("span").innerHTML);
+              })
+        )
+        
+
+          
+
+
+
+        function viewNewCategory(newCategory) {
+            var searchParams = new URLSearchParams(window.location.search);
+            searchParams.set("category", newCategory);
+            window.location.search = searchParams.toString()
+
+        }
+        function viewNewHeadCategory(newHeadCategory) {
+            console.log("works2");
+            var searchParams = new URLSearchParams(window.location.search);
+            searchParams.set("mainCategory", newHeadCategory);
+            window.location.search = searchParams.toString()
         }
         
         
