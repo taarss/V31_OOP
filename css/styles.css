@@ -885,4 +885,8 @@ h6 {
 .apiCheckBox .slider.round:before {
   border-radius: 50%;
 }
+
+.promotionalSlideshowImg {
+  width: 300px;
+}
 /*# sourceMappingURL=styles.css.map */

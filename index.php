@@ -2,14 +2,17 @@
     include_once 'include/autoloader.inc.php';
     include_once 'include/startSession.php';
     include_once 'classes/productview.php';
+    include_once 'classes/promotionalView.php';
     include_once 'classes/settingsView.php';
     $productView = new ProductView();
     $categoriesObj = new CategoriesView();
+    $promotionalView = new promotionalView();
     $productIds = $productView->getAllShowcaseProducts();
     $frontPageProducts = $productView->getAllProductsOfId($productIds);
     $settingsView = new SettingsView();
     $settings = json_decode($settingsView->viewAllSettings());
     $headCategories = $categoriesObj->getAllHeadCategories();
+    $promotionalSlides = $promotionalView->getSlideshowInfo();
 ?>
 <!doctype html>
 <html class="no-js" lang="en">
@@ -42,9 +45,9 @@
     <?php include 'include/nav.inc.php' ?>
     <div class="container">
         <ul class="slider" id="slider">
-            <li><img src="img/slide1.jpg" alt=""></li>
-            <li><img src="img/slide2.jpg" alt=""></li>
-            <li><img src="img/slide3.jpg" alt=""></li>
+        <?php foreach ($promotionalSlides as $key) { ?>
+            <li><img src="uploads/<?= $key['img'] ?>" alt=""></li>
+        <?php } ?>
         </ul>
     </div>
     <hr class="hide400">
@@ -128,7 +131,7 @@
                         <div class="col-md-4">
                             <div class="card mb-2">
                                 <a href="product.php?id=<?= str_replace("/customers/5/f/4/christianvillads.tech/httpd.www/opgaver/V31_OOP/", "", $frontPageProducts[$i]['img']) ?>">
-                                <img  id="frontPageProductImg" src="<?= $frontPageProducts[$i]['img'] ?>" alt="Card image cap">
+                                <img  id="frontPageProductImg" src="uploads/<?= $frontPageProducts[$i]['img'] ?>" alt="Card image cap">
                                 </a>
                                 <div class="card-body">
                                     <h5><?= $frontPageProducts[$i]['name'] ?></h5>
@@ -162,7 +165,7 @@
                         <div class="col-md-4">
                             <div class="card mb-2">
                                 <a href="product.php?id=<?= $frontPageProducts[$i]['id'] ?>">
-                                <img id="frontPageProductImg" src="<?= str_replace("/customers/5/f/4/christianvillads.tech/httpd.www/opgaver/V31_OOP/", "", $frontPageProducts[$i]['img']) ?>" alt="Card image cap">
+                                <img id="frontPageProductImg" src="uploads/<?= $frontPageProducts[$i]['img'] ?>" alt="Card image cap">
                                 </a>
                                 <div class="card-body">
                                     <h5><?= $frontPageProducts[$i]['name'] ?></h5>
@@ -183,7 +186,7 @@
                         <div class="col-md-4">
                             <div class="card mb-2">
                                 <a href="product.php?id=<?= $frontPageProducts[$i]['id'] ?>">
-                                <img  id="frontPageProductImg" src="<?= str_replace("/customers/5/f/4/christianvillads.tech/httpd.www/opgaver/V31_OOP/", "", $frontPageProducts[$i]['img']) ?>" alt="Card image cap">
+                                <img  id="frontPageProductImg" src="uploads/<?= $frontPageProducts[$i]['img'] ?>" alt="Card image cap">
                                 </a>
                                 <div class="card-body">
                                     <h5><?= $frontPageProducts[$i]['name'] ?></h5>

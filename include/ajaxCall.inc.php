@@ -17,6 +17,10 @@
     include_once '../classes/apiview.class.php';
     //Logs
     include_once '../classes/logView.class.php';
+    //Promotional material
+    include_once '../classes/promotionalController.php';
+    include_once '../classes/promotionalView.php';
+
     $categoryView = new CategoriesView();
     $categoryController = new CategoriesController();
     $productController = new ProductController();
@@ -27,6 +31,8 @@
     $apiController = new ApiController();
     $apiView = new ApiView();
     $logsView = new LogView();
+    $promotionalController = new promotionalController();
+    $promotionalView = new promotionalView();
     //Create initial admin
     if (isset($_POST['createInitialAdmin'])) {
         $accountController->createInitialAdmin($_POST['adminName']);
@@ -157,5 +163,14 @@
             echo json_encode($result);
         }
     }
-
+    //Get promotional slideshow
+    if(isset($_POST['getSlideShowInfo'])){
+        $result = $promotionalView->getSlideshowInfo();
+        echo json_encode($result);
+    }
+    //Update promotional slideshow
+    if(isset($_POST['updatePromotionalSlideshow'])){
+        echo var_dump($_FILES);
+        $promotionalController->updateSlideShowInfo($_POST['updatePromotionalSlideshow'], $_FILES);
+    }
     
