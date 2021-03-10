@@ -72,7 +72,7 @@
             `name` varchar(255) NOT NULL,
             `price` varchar(10) NOT NULL,
             `isOnSale` tinyint(4) DEFAULT 0,
-            `img` varchar(300) DEFAULT NULL,
+            `img` varchar(300) DEFAULT 'filler.png',
             `description` text NOT NULL,
             `dateCreated` date NOT NULL DEFAULT current_timestamp(),
             `manufactur` varchar(300) NOT NULL,
@@ -155,7 +155,19 @@
             ALTER TABLE `product_showcase`
             MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
             
-            INSERT INTO `products` (`id`, `name`, `price`, `isOnSale`, `img`, `description`, `dateCreated`, `manufactur`, `type`, `saleValue`, `createdBy`) VALUES (3, '123', '123', 0, 'filler.jpg', '123', '2021-03-09', '123', '2', '0', 1), (4, '123', '123', 0, 'filler.jpg', '123', '2021-03-09', '123', '2', '0', 1), (5, '123', '123', 0, 'filler.jpg', '123', '2021-03-09', '123', '2', '0', 1), (6, '123', '123', 0, 'filler.jpg', '123', '2021-03-09', '123', '2', '0', 1), (7, '123', '123', 0, 'filler.jpg', '123', '2021-03-09', '123', '2', '0', 1), (8, '123', '123', 0, 'filler.jpg', '123', '2021-03-09', '123', '2', '0', 1), (9, '123', '123', 0, 'filler.jpg', '123', '2021-03-09', '123', '2', '0', 1), (10, '123', '123', 0, 'filler.jpg', '123', '2021-03-09', '123', '2', '0', 1), (11, '123', '123', 0, 'filler.jpg', '123', '2021-03-09', '123', '2', '0', 1), (12, '123', '123', 0, 'filler.jpg', '123', '2021-03-09', '123', '2', '0', 1)
+            INSERT INTO `products` (`id`, `name`, `price`, `isOnSale`, `img`, `description`, `dateCreated`, `manufactur`, `type`, `saleValue`, `createdBy`) VALUES
+            (1, 'product', '123', 0, 'filler.png', '123', '2021-03-09', '123', '1', '0', 1),
+            (2, 'product', '123', 0, 'filler.png', '123', '2021-03-09', '123', '1', '0', 1),
+            (3, 'product', '123', 0, 'filler.png', '123', '2021-03-09', '123', '1', '0', 1),
+            (4, 'product', '123', 0, 'filler.png', '123', '2021-03-09', '123', '1', '0', 1),
+            (5, 'product', '123', 0, 'filler.png', '123', '2021-03-09', '123', '1', '0', 1),
+            (6, 'product', '123', 0, 'filler.png', '123', '2021-03-09', '123', '1', '0', 1),
+            (7, 'product', '123', 0, 'filler.png', '123', '2021-03-09', '123', '1', '0', 1),
+            (8, 'product', '123', 0, 'filler.png', '123', '2021-03-09', '123', '1', '0', 1),
+            (9, 'product', '123', 0, 'filler.png', '123', '2021-03-09', '123', '1', '0', 1),
+            (10, 'product', '123', 0, 'filler.png', '123', '2021-03-09', '123', '1', '0', 1),
+            (11, 'product', '123', 0, 'filler.png', '123', '2021-03-09', '123', '1', '0', 1),
+            (12, 'product', '123', 0, 'filler.png', '123', '2021-03-09', '123', '1', '0', 1);
             ";
 
             $stmt = $this->connect()->prepare($sql);

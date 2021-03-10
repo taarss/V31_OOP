@@ -29,7 +29,10 @@
     <?php include 'include/nav.inc.php' ?>
     <main id="header" class="d-flex my-5 flex-wrap">
         <div class="adminHeaderBtns  m-3">
-            <button class="editSiteInfoBtn">Edit website info</button>
+            <button class="editSiteInfoBtn m-2">Edit website info</button>
+            <button class="editPromoteBtn m-2">Change promotional material</button>
+            <button class="editSiteInfoBtn m-2">Analytics</button>
+
         </div>
         <div class="border rounded p-5 col-4 m-3 shadow" id="adminProducts">
             <h5>Products</h5>
@@ -127,6 +130,7 @@
         })
 
     </script>
+    <script src="adminJs/managePromotional.js"></script>
     <script src="adminJs/toggleApiLock.js"></script>
     <script src="adminJs/manageAccounts.js"></script>
     <script src="adminJs/manageProductShowcase.js"></script>
