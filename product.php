@@ -2,9 +2,12 @@
 include_once 'include/startSession.php';
 include_once 'classes/productview.php';
 include_once 'classes/accountview.class.php';
+include_once 'classes/analyticsController.php';
 include_once 'include/nav.inc.php';
 $currentProduct[] = $_GET['id'];
 $productView = new ProductView();
+$analyticsController = new analyticsController();
+$analyticsController->frequentlyViewedProductAddition($currentProduct);
 $productInfo = $productView->getAllProductsOfId($currentProduct);
 $recommendedProducts = $productView->getRandomProduct($productInfo[0]['type']);
 include_once 'classes/settingsView.php';

@@ -17,6 +17,11 @@
             (2, 1, 1, 1, 0),
             (3, 1, 1, 0, 0);
             
+            CREATE TABLE `promotional_material` (
+                `id` int(11) NOT NULL,
+                `img` varchar(256) NOT NULL DEFAULT 'filler.png'
+              ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
             CREATE TABLE `accounts` (
             `id` int(11) NOT NULL,
             `username` varchar(50) NOT NULL,
@@ -86,6 +91,18 @@
             `productId` int(11) NOT NULL DEFAULT 8
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+            CREATE TABLE `ANALYTICS_frequent_products` (
+                `id` int(11) NOT NULL,
+                `product_id` int(10) NOT NULL
+              ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+              CREATE TABLE `ANALYTICS_frequent_visitors` (
+                `id` int(11) NOT NULL,
+                `region` varchar(256) NOT NULL,
+                `city` varchar(256) NOT NULL
+              ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
             INSERT INTO `product_showcase` (`id`, `productId`) VALUES
             (1, 1),
             (2, 2),
@@ -99,7 +116,17 @@
             (10, 10),
             (11, 11),
             (12, 12);
+            
+            INSERT INTO `promotional_material` (`id`, `img`) VALUES
+            (1, 'filler.png'),
+            (2, 'filler.png'),
+            (3, 'filler.png');
 
+            ALTER TABLE `ANALYTICS_frequent_visitors`
+            ADD PRIMARY KEY (`id`);
+
+            ALTER TABLE `ANALYTICS_frequent_products`
+            ADD PRIMARY KEY (`id`);
 
             ALTER TABLE `accessLevel`
             ADD PRIMARY KEY (`id`);
@@ -127,6 +154,12 @@
 
             ALTER TABLE `head_categories`
             ADD PRIMARY KEY (`id`);
+
+            ALTER TABLE `promotional_material`
+            ADD PRIMARY KEY (`id`);
+
+            ALTER TABLE `ANALYTICS_frequent_visitors`
+            MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT;
             
             ALTER TABLE `accessLevel`
             MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
@@ -154,6 +187,12 @@
             
             ALTER TABLE `product_showcase`
             MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+            ALTER TABLE `ANALYTICS_frequent_products`
+            MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT;
+
+            ALTER TABLE `promotional_material`
+            MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
             
             INSERT INTO `products` (`id`, `name`, `price`, `isOnSale`, `img`, `description`, `dateCreated`, `manufactur`, `type`, `saleValue`, `createdBy`) VALUES
             (1, 'product', '123', 0, 'filler.png', '123', '2021-03-09', '123', '1', '0', 1),
