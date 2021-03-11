@@ -801,3 +801,25 @@ h6 {
 .promotionalSlideshowImg{
     width: 300px;
 }
+.locationTable{
+    overflow-y: scroll;
+}
+
+
+.locationRow{
+    display: flex;
+    justify-content: space-between;
+    height: 50px;
+    width: 100%;
+    align-items: center;
+    p{
+        margin: 0;
+        margin-left: 40px;
+    }
+    p:last-of-type{
+        margin-right: 40px;
+    }
+}
+.locationRow:nth-child(even){
+    background-color: lightgray;
+}

@@ -31,7 +31,7 @@
         <div class="adminHeaderBtns  m-3">
             <button class="editSiteInfoBtn m-2">Edit website info</button>
             <button class="editPromoteBtn m-2">Change promotional material</button>
-            <button class="editSiteInfoBtn m-2">Analytics</button>
+            <button class="analyticsBtn m-2">Analytics</button>
 
         </div>
         <div class="border rounded p-5 col-4 m-3 shadow" id="adminProducts">
@@ -127,7 +127,11 @@
         document.querySelector(".editSiteInfoBtn").addEventListener("click", function(){
             window.location.href = 'install/installSettings.php';
             console.log("log");
-        })
+        });
+        document.querySelector(".analyticsBtn").addEventListener("click", function(){
+            window.location.href = 'analytics.php';
+            console.log("log");
+        });
 
     </script>
     <script src="adminJs/managePromotional.js"></script>

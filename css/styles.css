@@ -889,4 +889,35 @@ h6 {
 .promotionalSlideshowImg {
   width: 300px;
 }
+
+.locationTable {
+  overflow-y: scroll;
+}
+
+.locationRow {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  height: 50px;
+  width: 100%;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.locationRow p {
+  margin: 0;
+  margin-left: 40px;
+}
+
+.locationRow p:last-of-type {
+  margin-right: 40px;
+}
+
+.locationRow:nth-child(even) {
+  background-color: lightgray;
+}
 /*# sourceMappingURL=styles.css.map */

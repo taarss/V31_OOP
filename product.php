@@ -70,7 +70,7 @@ $settings = json_decode($settingsView->viewAllSettings());
                         <div class="col-md-4">
                             <div class="card mb-2">
                                 <a href="product.php?id=<?= $recommendedProducts[$i]['id'] ?>">
-                                <img id="frontPageProductImg" src="<?php echo str_replace("/customers/5/f/4/christianvillads.tech/httpd.www/opgaver/V31_OOP/", "", $recommendedProducts[$i]['img']);  ?>" alt="Card image cap">
+                                <img id="frontPageProductImg" src="uploads/<?= $recommendedProducts[$i]['img'];  ?>" alt="Card image cap">
                                 </a>
                                 <div class="card-body">
                                     <h5 class="card-title"><?= $recommendedProducts[$i]['name'] ?></h5>
@@ -91,7 +91,7 @@ $settings = json_decode($settingsView->viewAllSettings());
                         <div class="col-md-4">
                             <div class="card mb-2">
                                 <a href="product.php?id=<?= $recommendedProducts[$i]['id'] ?>">
-                                <img  id="frontPageProductImg" src="<?php echo str_replace("/customers/5/f/4/christianvillads.tech/httpd.www/opgaver/V31_OOP/", "", $recommendedProducts[$i]['img']);  ?>" alt="Card image cap">
+                                <img  id="frontPageProductImg" src="uploads/<?= $recommendedProducts[$i]['img'];  ?>" alt="Card image cap">
                                 </a>
                                 <div class="card-body">
                                     <h5 class="card-title"><?= $recommendedProducts[$i]['name'] ?></h5>
