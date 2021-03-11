@@ -20,7 +20,8 @@
     //Promotional material
     include_once '../classes/promotionalController.php';
     include_once '../classes/promotionalView.php';
-
+    //Analytics
+    include_once '../classes/analyticsView.php';
     $categoryView = new CategoriesView();
     $categoryController = new CategoriesController();
     $productController = new ProductController();
@@ -33,6 +34,7 @@
     $logsView = new LogView();
     $promotionalController = new promotionalController();
     $promotionalView = new promotionalView();
+    $analyticsView = new analyticsView();
     //Create initial admin
     if (isset($_POST['createInitialAdmin'])) {
         $accountController->createInitialAdmin($_POST['adminName']);
@@ -170,7 +172,15 @@
     }
     //Update promotional slideshow
     if(isset($_POST['updatePromotionalSlideshow'])){
-        echo var_dump($_FILES);
         $promotionalController->updateSlideShowInfo($_POST['updatePromotionalSlideshow'], $_FILES);
+    }
+
+    if(isset($_POST['getFrequentProducts'])){
+        $result = $analyticsView->getAllfrequentProduct();
+        echo json_encode($result);
+    }
+    if(isset($_POST['getFrequentVisitors'])){
+        $result = $analyticsView->getAllFrequentVisitors();
+        echo json_encode($result);
     }
     

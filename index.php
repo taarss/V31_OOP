@@ -46,7 +46,7 @@
     <div class="container">
         <ul class="slider" id="slider">
         <?php foreach ($promotionalSlides as $key) { ?>
-            <li><img src="uploads/<?= $key['img'] ?>" alt=""></li>
+            <li><img style="height: 200px; object-fit:cover" src="uploads/<?= $key['img'] ?>" alt=""></li>
         <?php } ?>
         </ul>
     </div>
